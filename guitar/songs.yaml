@@ -1,0 +1,239 @@
+songs:
+  # --- Beginner ---
+
+  - title: "Wonderwall"
+    artist: "Oasis"
+    difficulty: "Beginner"
+    genre: "Rock"
+    key: "F#/Gb"
+    tuning: "Standard (EADGBE)"
+    bpm: 87
+    capo: 2
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/oasis/wonderwall-chords-27596"
+    notes: "Great song for learning basic chord progressions and strumming patterns. Focus on smooth transitions between Em7, G, Dsus4, and A7sus4."
+
+  - title: "Folsom Prison Blues"
+    artist: "Johnny Cash"
+    difficulty: "Beginner"
+    genre: "Country"
+    key: "E"
+    tuning: "Standard (EADGBE)"
+    bpm: 104
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/johnny-cash/folsom-prison-blues-tabs-332252"
+    notes: "Learn the boom-chicka train rhythm by alternating bass notes with muted strums. The intro lead line uses a simple pentatonic lick that should be played with a confident, snappy tone. Keep a steady, driving rhythm throughout."
+
+  - title: "Good Riddance (Time of Your Life)"
+    artist: "Green Day"
+    difficulty: "Beginner"
+    genre: "Rock"
+    key: "G"
+    tuning: "Standard (EADGBE)"
+    bpm: 95
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/green-day/good-riddance-time-of-your-life-tabs-12816"
+    notes: "Master the fingerpicking intro pattern using G, Cadd9, and Dsus4 chords. Maintain a steady alternating bass note with the thumb while fingers play the melody on higher strings. Practice the strumming pattern transition for the chorus."
+
+  - title: "Tennessee Whiskey"
+    artist: "Chris Stapleton"
+    difficulty: "Beginner"
+    genre: "Country"
+    key: "A"
+    tuning: "Standard (EADGBE)"
+    bpm: 82
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/chris-stapleton/tennessee-whiskey-tabs-1741208"
+    notes: "Focus on the smooth A-Bm chord progression with blues-influenced embellishments. Add slides and hammer-ons between chord changes to emulate Stapleton's style. The solo sections use the A major pentatonic scale with expressive bends."
+
+  # --- Intermediate ---
+
+  - title: "Blackbird"
+    artist: "The Beatles"
+    difficulty: "Intermediate"
+    genre: "Folk"
+    key: "G"
+    tuning: "Standard (EADGBE)"
+    bpm: 92
+    capo: 3
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/the-beatles/blackbird-tabs-180986"
+    notes: "Fingerpicking pattern with melody and bass line played simultaneously. Keep thumb steady on bass notes while fingers play melody."
+
+  - title: "Under the Bridge"
+    artist: "Red Hot Chili Peppers"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "E"
+    tuning: "Standard (EADGBE)"
+    bpm: 85
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/red-hot-chili-peppers/under-the-bridge-tabs-3832"
+    notes: "The intro uses a distinctive chord melody with hammer-ons played fingerstyle. Focus on the verse chord voicings which use extensions and inversions up the neck. Practice the clean tone dynamics as the song builds intensity gradually."
+
+  - title: "Santeria"
+    artist: "Sublime"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "E"
+    tuning: "Standard (EADGBE)"
+    bpm: 89
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/sublime/santeria-tabs-52056"
+    notes: "Learn the clean intro riff which outlines the E-G#-C#m-B progression. Practice the verse rhythm with a reggae-influenced upstroke pattern. The solo is melodic and uses the E major/C# minor pentatonic scale with smooth legato runs."
+
+  - title: "Snow (Hey Oh)"
+    artist: "Red Hot Chili Peppers"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "A"
+    tuning: "Standard (EADGBE)"
+    bpm: 105
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/red-hot-chili-peppers/snow-hey-oh-tabs-360889"
+    notes: "The main riff is a rapid-fire picking pattern across all six strings requiring precise right-hand control. Start at half speed with a metronome and gradually build up. Focus on keeping each note clean and even while maintaining the arpeggiated pattern."
+
+  - title: "Sweet Home Alabama"
+    artist: "Lynyrd Skynyrd"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "D"
+    tuning: "Standard (EADGBE)"
+    bpm: 100
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/lynyrd-skynyrd/sweet-home-alabama-tabs-6882"
+    notes: "Focus on the main riff timing and string muting. Lock in with the groove; practice transitions between D, C, and G shapes and the fill variations."
+
+  - title: "All Along the Watchtower"
+    artist: "Jimi Hendrix"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "C#/Db"
+    tuning: "Standard (EADGBE)"
+    bpm: 113
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/jimi-hendrix/all-along-the-watchtower-tabs-273100"
+    notes: "Tune down a half step. Learn the C#m-B-A chord pattern with Hendrix-style embellishments using the thumb for bass notes. Focus on rhythmic strumming with percussive muting and expressive lead fills between vocal lines."
+
+  - title: "Wish You Were Here"
+    artist: "Pink Floyd"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "G"
+    tuning: "Standard (EADGBE)"
+    bpm: 120
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/pink-floyd/wish-you-were-here-tabs-104578"
+    notes: "Start with the iconic acoustic intro, focusing on the 12-string emulation using open strings. Master the Em7-G-A7sus4 progression and the distinctive picking pattern. The solo section uses expressive bends and vibrato in the pentatonic scale."
+
+  - title: "Everlong"
+    artist: "Foo Fighters"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "D"
+    tuning: "Drop D"
+    bpm: 158
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/foo-fighters/everlong-tabs-49532"
+    notes: "Tune to Drop D. Focus on the signature riff using hammer-ons and pull-offs on the D and G strings. The verse uses a clean arpeggio pattern; practice switching between clean and distortion sections smoothly."
+
+  - title: "Basket Case"
+    artist: "Green Day"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "D#/Eb"
+    tuning: "Standard (EADGBE)"
+    bpm: 171
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/green-day/basket-case-tabs-41582"
+    notes: "Fast power chord changes drive this song; practice quick transitions between Eb, Bb, Cm, and Gm shapes. Focus on tight palm-muted downstrokes for the verse and open strumming for the chorus. Use a metronome to lock in the punk tempo."
+
+  - title: "Limelight"
+    artist: "Rush"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "E"
+    tuning: "Standard (EADGBE)"
+    bpm: 136
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/rush/limelight-tabs-100070"
+    notes: "The iconic opening riff uses a mix of natural harmonics and open strings that requires precise right-hand technique — focus on getting clean harmonic tones at the 12th and 7th frets. The verse rhythm part features syncopated power chord patterns that lock in with Neil Peart's drumming, so practice with a metronome at a slower tempo before building up to full speed. Alex Lifeson's solo section involves quick position shifts and bends, so work through it in short phrases."
+
+  # --- Advanced ---
+
+  - title: "Slow Dancing in a Burning Room"
+    artist: "John Mayer"
+    difficulty: "Advanced"
+    genre: "Blues"
+    key: "C#/Db"
+    tuning: "Standard (EADGBE)"
+    bpm: 130
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/john-mayer/slow-dancing-in-a-burning-room-tabs-449994"
+    notes: "Focus on the signature intro riff which uses double stops and subtle bends. The rhythm parts blend clean chord voicings with bluesy embellishments. Study Mayer's use of thumb-over bass notes and hybrid picking for the verse patterns."
+
+  - title: "Little Wing"
+    artist: "Jimi Hendrix"
+    difficulty: "Advanced"
+    genre: "Rock"
+    key: "E"
+    tuning: "Half Step Down"
+    bpm: 71
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/jimi-hendrix/little-wing-tabs-36571"
+    notes: "Complex chord voicings with thumb-over technique. Practice the signature fills between chords slowly. Pay attention to dynamics and vibrato."
+
+  - title: "Pride and Joy"
+    artist: "Stevie Ray Vaughan"
+    difficulty: "Advanced"
+    genre: "Blues"
+    key: "E"
+    tuning: "Standard (EADGBE)"
+    bpm: 120
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/stevie-ray-vaughan-double-trouble/pride-and-joy-tabs-30829"
+    notes: "Master the Texas shuffle rhythm with the thumb playing bass notes on the low E while fingers handle the shuffle pattern. Practice the turnaround lick at slow tempo and nail the syncopated timing that drives the groove."
+
+  - title: "Hallowed Be Thy Name"
+    artist: "Iron Maiden"
+    difficulty: "Advanced"
+    genre: "Metal"
+    key: "E"
+    tuning: "Standard (EADGBE)"
+    bpm: 100
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/iron-maiden/hallowed-be-thy-name-tabs-272171"
+    notes: "Learn the dual-harmony guitar parts separately before combining them. The intro arpeggio sets the foundation; focus on clean alternate picking through the galloping rhythm sections. Build speed gradually for the fast triplet runs in the solos."
+
+  - title: "Crazy Train"
+    artist: "Ozzy Osbourne"
+    difficulty: "Advanced"
+    genre: "Metal"
+    key: "F#/Gb"
+    tuning: "Standard (EADGBE)"
+    bpm: 138
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/ozzy-osbourne/crazy-train-tabs-38622"
+    notes: "The iconic intro riff uses a tapping/pull-off pattern on the open A string. Practice the main galloping rhythm with tight palm muting. Randy Rhoads' solo sections require alternate picking precision and string-skipping technique."
+
+  - title: "Hotel California"
+    artist: "Eagles"
+    difficulty: "Advanced"
+    genre: "Rock"
+    key: "B"
+    tuning: "Standard (EADGBE)"
+    bpm: 74
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/eagles/hotel-california-tabs-14341"
+    notes: "Master the iconic intro arpeggio pattern in Bm using fingerpicking or hybrid picking. Practice the harmonized dual-guitar solo section slowly, focusing on accurate bends. The verse uses arpeggiated chords that walk through the progression."
+
+  - title: "Comfortably Numb"
+    artist: "Pink Floyd"
+    difficulty: "Advanced"
+    genre: "Rock"
+    key: "B"
+    tuning: "Standard (EADGBE)"
+    bpm: 126
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/pink-floyd/comfortably-numb-tabs-79177"
+    notes: "The verse uses clean, arpeggiated chords (Bm, A, G, Em). The real challenge is the two solos, especially the legendary second solo. Practice bends and vibrato in D minor pentatonic, focusing on sustain and phrasing over speed."
