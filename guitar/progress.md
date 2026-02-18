@@ -21,3 +21,14 @@
 - **Next session focus:**
   - Continue drilling major and minor triad positions (Level 2)
   - Revisit Level 1 solo bars 4 and 11–12 with a metronome at a slower tempo
+
+### 2026-02-17 (2 hrs)
+
+- **What I worked on:** Fretboard note location drills and a triad refresher. Watched the Level 2 pentatonic scales lesson and jammed over backing tracks, switching between pentatonic scale shapes to match the chord changes. Wrapped up with tempo work on Snow (RHCP) and experimenting with tones on the Nolly X plugin.
+- **How it went:** The pentatonic lesson was a refresher — these shapes are familiar territory and probably my most-practiced material. The real fun was improvising over the backing track and trying to match scale positions to the underlying chords in real time. Snow is a good tempo challenge.
+- **Key takeaways:**
+  - Improvising over chord changes with different pentatonic positions is a great way to internalize the shapes beyond muscle memory
+  - Need to push beyond pentatonics — they're a comfort zone
+- **Next session focus:**
+  - Continue Level 2 pentatonic material and chord-targeted improvisation
+  - Keep working Snow up to speed with a metronome
