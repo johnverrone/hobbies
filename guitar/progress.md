@@ -32,3 +32,16 @@
 - **Next session focus:**
   - Continue Level 2 pentatonic material and chord-targeted improvisation
   - Keep working Snow up to speed with a metronome
+
+### 2026-02-18 (2.5 hrs)
+
+- **What I worked on:** Set up Neural Amp Modeler (NAM) as a replacement for the expiring Nolly X trial. Spent a big chunk of time browsing and auditioning NAM profiles to find usable tones. Settled on a Deluxe Reverb clean with GarageBand compression and overdrive, plus a Mesa Boogie Triple Rectifier high-gain profile. After dialing in tones, spent ~1 hr improvising over a self-recorded backing track using pentatonic scales. Revisited the Level 1 solo to work on speed and cleanliness.
+- **How it went:** NAM is a rabbit hole — tons of community profiles and it's easy to lose track of time A/B-ing sounds. The Deluxe Reverb tone ended up being really satisfying for cleans; the Triple Rec is massive for high gain. Improvising felt good and the pentatonic shapes are becoming more automatic. The Level 1 solo is noticeably more comfortable now, even at the full 85 bpm, though bar 4 still trips me up.
+- **Key takeaways:**
+  - NAM is a solid free alternative to paid amp sims — worth investing time to curate a small set of go-to profiles rather than endlessly browsing
+  - GarageBand's built-in drive and compressor are workable but limiting — look into better effect plugins (pedal-style VSTs?)
+  - Bar 4 of the Level 1 solo is the remaining sticking point — isolate and drill it
+- **Next session focus:**
+  - Drill Level 1 solo bar 4 in isolation at a slow tempo, then build back up to 85 bpm
+  - Continue pentatonic improvisation with the new tones
+  - Start looking into dedicated compressor/drive plugins
