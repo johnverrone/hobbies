@@ -45,3 +45,16 @@
   - Drill Level 1 solo bar 4 in isolation at a slow tempo, then build back up to 85 bpm
   - Continue pentatonic improvisation with the new tones
   - Start looking into dedicated compressor/drive plugins
+
+### 2026-02-19 (2 hrs)
+
+- **What I worked on:** Spent time throughout the day thinking about chord formulation and basic music theory. Challenged myself to identify the key of a random song by ear — ended up picking one in F# Mixolydian with a progression that doesn't start on I (D#m – F# – E – F#), which was a real puzzle. After that, went back to the Level 1 solo to try to master it. Also spent a good chunk of time dialing in the recording workflow (camera placement, file organization, color grading, audio bounce settings).
+- **How it went:** The key-identification exercise was humbling — F# Mixolydian with a non-I starting chord is a tough draw for an ear training challenge. Good learning moment though. The Level 1 solo came much more naturally after a day or two off, and I finally nailed the rhythm in bar 4. Recorded a take to log progress: [Level 1 Solo Attempt](https://youtu.be/1xRSYCBZZY4?si=wg1Shqrv_l4BSXMS).
+- **Key takeaways:**
+  - Rest days pay off — the solo felt noticeably smoother after stepping away
+  - Trying to identify keys by ear is a great exercise, even (especially) when you pick a hard one
+  - Recording workflow is an investment — worth getting the process smooth now so future takes are frictionless
+- **Next session focus:**
+  - Continue refining the Level 1 solo — clean up any remaining rough spots
+  - More ear training / key identification practice with simpler songs
+  - Push forward with Level 2 material
