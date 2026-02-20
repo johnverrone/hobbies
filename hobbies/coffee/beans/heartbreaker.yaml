@@ -1,0 +1,16 @@
+name: "Heartbreaker"
+slug: "heartbreaker"
+roaster: "docent"
+rating: 3
+origins:
+  - Colombia
+flavors:
+  - Chocolate
+  - Nutty
+process: "Washed"
+single_origin: true
+currently_brewing: true
+price_12oz: 19.00
+notes: "Smooth and balanced, great daily drinker."
+image_url: ""
+created: "2025-12-01"

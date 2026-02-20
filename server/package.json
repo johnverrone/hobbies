@@ -2,8 +2,9 @@
   "name": "server",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy --minify",
+    "generate": "bun run scripts/generate-coffee-data.ts",
+    "dev": "bun run generate && wrangler dev",
+    "deploy": "bun run generate && wrangler deploy --minify",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {

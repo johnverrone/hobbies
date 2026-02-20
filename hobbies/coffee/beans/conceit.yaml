@@ -1,0 +1,16 @@
+name: "Conceit"
+slug: "conceit"
+roaster: "brandywine"
+rating: 4
+origins:
+  - Ethiopia
+flavors:
+  - Fruity
+  - Sweet
+process: "Natural"
+single_origin: true
+currently_brewing: false
+price_12oz: 22.00
+notes: "Bright and complex with blueberry notes."
+image_url: ""
+created: "2025-11-15"

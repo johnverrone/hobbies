@@ -22,19 +22,20 @@ No test runner, linter, or formatter is configured yet.
 ## Architecture
 
 ```
-hobbies/
-├── guitar/                  # Hobby data (YAML + markdown)
-│   ├── songs.yaml           # Song database
-│   ├── progress.yaml        # Skill self-assessment
-│   └── plan.md              # Practice plan
-└── server/                  # Cloudflare Workers API (Hono)
+hobbies/               # Project root
+├── hobbies/            # Hobby data directories
+│   └── guitar/         # Guitar hobby (YAML + markdown)
+│       ├── songs.yaml  # Song database
+│       ├── progress.yaml # Skill self-assessment
+│       └── plan.md     # Practice plan
+└── server/             # Cloudflare Workers API (Hono)
     └── src/
         ├── index.ts         # App entry, mounts sub-routers
         ├── routes/guitar.ts # GET /guitar/songs
         └── yaml.d.ts        # Ambient type for *.yaml imports
 ```
 
-**Data flow:** Wrangler bundles YAML files as text modules at build time (via `rules` in `wrangler.jsonc`). Route modules import YAML from `../../<hobby>/` paths, parse once at module load with the `yaml` package, and serve via `c.json()`.
+**Data flow:** Wrangler bundles YAML files as text modules at build time (via `rules` in `wrangler.jsonc`). Route modules import YAML from `../../hobbies/<hobby>/` paths, parse once at module load with the `yaml` package, and serve via `c.json()`.
 
 **Adding a new hobby endpoint:** Create a `<hobby>/` directory with YAML data, add a route file in `server/src/routes/`, and mount it in `index.ts` with `app.route()`.
 
