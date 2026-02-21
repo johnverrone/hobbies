@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { parse } from "yaml";
-import songsYaml from "../../../guitar/songs.yaml";
-import progressMd from "../../../guitar/progress.md";
-import planMd from "../../../guitar/plan.md";
+import songsYaml from "@hobbies/guitar/songs.yaml";
+import progressMd from "@hobbies/guitar/progress.md";
+import planMd from "@hobbies/guitar/plan.md";
 
 type Song = {
   title: string;

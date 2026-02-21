@@ -1,0 +1,18 @@
+name: Tigerwalk Espresso
+slug: tigerwalk
+roaster: equator-coffees
+rating: 4
+origins:
+  - Columbia
+  - Kenya
+  - Brazil
+flavors:
+  - Fruity
+  - Spices
+process: Washed
+single_origin: false
+currently_brewing: false
+price_12oz: 16
+notes: ""
+image_url: ""
+created: 2022-08-25

@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import guitar from './routes/guitar'
+import coffee from './routes/coffee'
 
 const app = new Hono()
 
@@ -21,5 +22,6 @@ app.get('/', (c) => {
 })
 
 app.route('/guitar', guitar)
+app.route('/coffee', coffee)
 
 export default app

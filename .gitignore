@@ -14,6 +14,9 @@ dist/
 logs/
 *.log
 
+# generated
+server/src/generated/
+
 # misc
 .DS_Store
 

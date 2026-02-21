@@ -1,0 +1,16 @@
+name: Coconut Lemonade
+slug: coconut-lemonade
+roaster: edison-coffee-co
+rating: 3
+origins:
+  - Columbia
+flavors:
+  - Fruity
+  - Sour / Fermented
+process: ""
+single_origin: true
+currently_brewing: false
+price_12oz: 23
+notes: co-fermented with citrus, coconut, molasses, and sugar
+image_url: ""
+created: 2024-04-30

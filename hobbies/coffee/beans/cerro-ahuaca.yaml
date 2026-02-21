@@ -1,0 +1,17 @@
+name: Cerro Ahuaca
+slug: cerro-ahuaca
+roaster: huckleberry-coffee-roasters
+rating: null
+origins:
+  - Ecuador
+flavors:
+  - Fruity
+  - Sweet
+  - Sour / Fermented
+process: Washed
+single_origin: true
+currently_brewing: false
+price_12oz: null
+notes: ""
+image_url: ""
+created: 2025-06-17

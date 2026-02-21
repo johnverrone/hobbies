@@ -1,0 +1,18 @@
+name: Westerlies Winds
+slug: westerlies-winds
+roaster: corvus-coffee-roasters
+rating: null
+origins:
+  - Columbia
+  - Indonesia
+  - Ethiopia
+flavors:
+  - Spices
+  - Nutty / Cocoa
+process: Blend
+single_origin: false
+currently_brewing: false
+price_12oz: null
+notes: ""
+image_url: ""
+created: 2025-06-11

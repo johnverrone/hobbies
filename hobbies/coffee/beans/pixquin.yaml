@@ -1,0 +1,17 @@
+name: Guatemala Pixquin
+slug: pixquin
+roaster: herkimer-coffee
+rating: null
+origins:
+  - Guatemala
+flavors:
+  - Sour / Fermented
+  - Fruity
+  - Green / Vegetative
+process: Natural
+single_origin: true
+currently_brewing: false
+price_12oz: 16
+notes: ""
+image_url: ""
+created: 2023-08-09

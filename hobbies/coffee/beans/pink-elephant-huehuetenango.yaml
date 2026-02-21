@@ -1,0 +1,16 @@
+name: Guatamala Huehuetenango
+slug: pink-elephant-huehuetenango
+roaster: pink-elephant-coffee-roasters
+rating: 2
+origins:
+  - Guatemala
+flavors:
+  - Fruity
+  - Nutty / Cocoa
+process: Washed
+single_origin: true
+currently_brewing: false
+price_12oz: 18
+notes: ""
+image_url: ""
+created: 2022-02-23

@@ -1,0 +1,15 @@
+name: Shakiso
+slug: shakiso
+roaster: edison-coffee-co
+rating: 4
+origins:
+  - Ethiopia
+flavors:
+  - Fruity
+process: Natural
+single_origin: true
+currently_brewing: false
+price_12oz: 22
+notes: ""
+image_url: ""
+created: 2024-08-05

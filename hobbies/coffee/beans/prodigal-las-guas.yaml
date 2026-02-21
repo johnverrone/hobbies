@@ -1,0 +1,16 @@
+name: Las Guas
+slug: prodigal-las-guas
+roaster: prodigal-coffee
+rating: 4
+origins:
+  - Ecuador
+flavors:
+  - Fruity
+  - Sweet
+process: Washed
+single_origin: true
+currently_brewing: false
+price_12oz: 18
+notes: ""
+image_url: ""
+created: 2024-02-14

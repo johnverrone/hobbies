@@ -1,0 +1,16 @@
+name: Frequency
+slug: frequency
+roaster: edison-coffee-co
+rating: 5
+origins:
+  - Costa Rica
+  - Guatemala
+flavors:
+  - Fruity
+process: ""
+single_origin: false
+currently_brewing: false
+price_12oz: 18
+notes: ""
+image_url: ""
+created: 2024-06-29

@@ -1,0 +1,16 @@
+name: Delfino
+slug: delfino
+roaster: edison-coffee-co
+rating: 4
+origins:
+  - Mexico
+flavors:
+  - Nutty / Cocoa
+  - Fruity
+process: Washed
+single_origin: true
+currently_brewing: false
+price_12oz: 21
+notes: ""
+image_url: ""
+created: 2024-04-09
