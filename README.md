@@ -18,34 +18,40 @@ This repo serves as the single source of truth for all my hobbies. Each hobby ge
 
 ```
 hobbies/
-├── <hobby-name>/
-│   ├── progress.md
-│   ├── metrics.md
-│   ├── plan.md
-│   ├── monetization.md
-│   └── ...
-├── server/              # REST API + MCP server
-├── .github/workflows/   # Nightly agent runs
+├── hobbies/
+│   ├── coffee/              # Coffee hobby
+│   │   ├── beans/           # Individual bean YAML files
+│   │   └── roasters/        # Individual roaster YAML files
+│   └── guitar/              # Guitar hobby
+│       ├── songs.yaml       # Song database
+│       ├── progress.md      # Skill self-assessment
+│       ├── plan.md          # Practice plan
+│       └── level1test.md    # Level 1 proficiency test
+├── server/                  # Cloudflare Workers API (Hono)
+│   ├── src/
+│   │   ├── index.ts         # App entry, mounts sub-routers
+│   │   ├── routes/
+│   │   │   ├── guitar.ts    # GET /guitar/songs
+│   │   │   └── coffee.ts    # GET /coffee/beans, /coffee/roasters
+│   │   └── generated/       # Pre-built JSON data (coffee)
+│   └── scripts/
+│       └── generate-coffee-data.ts
 └── README.md
 ```
 
-### Nightly AI Agents (GitHub Actions)
+### Data Flow
 
-A GitHub Action runs on a nightly schedule, spinning up AI agents that:
-
-- Review and develop practice/improvement plans
-- Expand on goals and suggest next steps
-- Check in on metrics and flag stalls or breakthroughs
-- Write and refine business proposals for monetization ideas
-- Submit pull requests with their contributions for review
+Wrangler bundles YAML files as text modules at build time (via `rules` in `wrangler.jsonc`). Route modules import data, parse it, and serve via `c.json()`. Coffee data is pre-generated into JSON by a build script.
 
 ### Server
 
-A lightweight server exposing two interfaces:
+A Cloudflare Workers REST API (built with Hono) serving hobby data as JSON for [johnverrone.com](https://johnverrone.com) to pull and render a hobby dashboard.
 
-- **REST API** — for [johnverrone.com](https://johnverrone.com) to pull data and render a hobby dashboard
-- **MCP Server** — for chatting with Claude about goals, progress, what to do next, and general hobby planning
+### Planned
+
+- **Nightly AI Agents (GitHub Actions)** — agents that review plans, suggest next steps, and submit PRs
+- **MCP Server** — for chatting with Claude about goals, progress, and hobby planning
 
 ## Status
 
-Early development. Setting up the repo structure and initial hobby directories.
+Active development. Guitar and coffee hobbies are tracked with a working API deployed to Cloudflare Workers.
