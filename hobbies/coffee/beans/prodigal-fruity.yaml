@@ -1,0 +1,16 @@
+name: Fruity Espresso
+slug: prodigal-fruity
+roaster: prodigal-coffee
+rating: 4
+origins:
+  - Columbia
+flavors:
+  - Fruity
+  - Sweet
+process: Washed
+single_origin: true
+currently_brewing: false
+price_12oz: 21
+notes: ""
+image_url: ""
+created: 2024-02-10

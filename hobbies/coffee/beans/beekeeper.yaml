@@ -1,0 +1,19 @@
+name: Beekeeper
+slug: beekeeper
+roaster: publik-coffee-roasters
+rating: 4
+origins:
+  - Ethiopia
+  - Mexico
+flavors:
+  - Fruity
+  - Sweet
+process: ""
+single_origin: false
+currently_brewing: false
+price_12oz: 18
+notes: |-
+  Ethiopian part is naturally processed
+  Mexican part is washed
+image_url: ""
+created: 2022-02-23

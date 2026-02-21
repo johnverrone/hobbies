@@ -1,0 +1,16 @@
+name: West Coast Espresso
+slug: west-coast-espresso
+roaster: panther-coffee
+rating: 4
+origins: []
+flavors:
+  - Sweet
+  - Nutty / Cocoa
+  - Fruity
+process: ""
+single_origin: false
+currently_brewing: false
+price_12oz: 19
+notes: ""
+image_url: ""
+created: 2023-01-26

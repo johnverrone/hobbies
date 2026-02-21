@@ -1,16 +1,16 @@
-name: Conceit
-slug: conceit
-roaster: docent
-rating: 5
+name: El Salvador
+slug: el-salvador
+roaster: blue-copper
+rating: 3
 origins:
-  - Ethiopia
+  - El Salvador
 flavors:
   - Fruity
-  - Sweet
+  - Nutty / Cocoa
 process: ""
 single_origin: true
 currently_brewing: false
-price_12oz: 18
+price_12oz: 20
 notes: ""
 image_url: ""
 created: 2022-02-23

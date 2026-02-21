@@ -1,0 +1,15 @@
+name: Maravilla La Cumbre
+slug: maravilla-la-cumbre
+roaster: corvus-coffee-roasters
+rating: 4
+origins:
+  - Guatemala
+flavors:
+  - Nutty / Cocoa
+process: Washed
+single_origin: true
+currently_brewing: false
+price_12oz: null
+notes: ""
+image_url: ""
+created: 2025-01-10

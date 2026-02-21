@@ -1,7 +1,7 @@
-name: Conceit
-slug: conceit
-roaster: docent
-rating: 5
+name: Tropical Weather
+slug: tropical-weather
+roaster: onyx-coffee-lab
+rating: 4
 origins:
   - Ethiopia
 flavors:
@@ -10,7 +10,7 @@ flavors:
 process: ""
 single_origin: true
 currently_brewing: false
-price_12oz: 18
+price_12oz: 20
 notes: ""
 image_url: ""
 created: 2022-02-23

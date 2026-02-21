@@ -3,6 +3,10 @@
   "name": "hobbies",
   "main": "src/index.ts",
   "compatibility_date": "2026-02-14",
+  "build": {
+    "command": "bun run generate",
+    "watch_dir": "../hobbies/coffee"
+  },
   "rules": [
     {
       "type": "Text",

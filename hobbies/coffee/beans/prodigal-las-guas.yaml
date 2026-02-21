@@ -1,16 +1,16 @@
-name: Conceit
-slug: conceit
-roaster: docent
-rating: 5
+name: Las Guas
+slug: prodigal-las-guas
+roaster: prodigal-coffee
+rating: 4
 origins:
-  - Ethiopia
+  - Ecuador
 flavors:
   - Fruity
   - Sweet
-process: ""
+process: Washed
 single_origin: true
 currently_brewing: false
 price_12oz: 18
 notes: ""
 image_url: ""
-created: 2022-02-23
+created: 2024-02-14

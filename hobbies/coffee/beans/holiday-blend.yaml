@@ -1,12 +1,10 @@
-name: Conceit
-slug: conceit
-roaster: docent
-rating: 5
+name: Holiday Blend
+slug: holiday-blend
+roaster: kiln
+rating: 3
 origins:
-  - Ethiopia
-flavors:
-  - Fruity
-  - Sweet
+  - Guatemala
+flavors: []
 process: ""
 single_origin: true
 currently_brewing: false
