@@ -58,3 +58,16 @@
   - Continue refining the Level 1 solo — clean up any remaining rough spots
   - More ear training / key identification practice with simpler songs
   - Push forward with Level 2 material
+
+### 2026-02-21 (2 hrs)
+
+- **What I worked on:** Started with the bending lesson from Level 2 of Next Level Playing, then dove into the Level 2 capstone solo "Feeling Blue in B Minor." Spent most of the session looping the solo to internalize the groove and nail the bends. Got a few runs in at full speed (85 bpm). Also set up Ableton Live 12 as my DAW, replacing GarageBand.
+- **How it went:** The solo took a while to click but I eventually got most of it down. The bends are the crux — getting them in tune and in the pocket of the groove is the challenge. Running it at 85 bpm felt like a stretch but doable. The Ableton switch was a big upgrade: the Fender Super Reverb NAM profile paired with Ableton's built-in 'garage' reverb on the neck pickup was an incredible tone.
+- **Key takeaways:**
+  - Ableton Live 12 is a significant step up from GarageBand — worth the switch
+  - NAM Super Reverb + Ableton garage reverb on the neck pickup = chef's kiss
+  - Tuning stability is becoming a real frustration — the Floyd Rose trem doesn't help, but this might just be me building a case for a new guitar (tele brain says practical, heart says strat)
+- **Next session focus:**
+  - Record an attempt at the Level 2 solo
+  - Revisit Level 1 scales and fretboard exercises before moving to Level 3
+  - Continue refining bends in the solo
