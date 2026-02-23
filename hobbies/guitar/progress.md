@@ -71,3 +71,16 @@
   - Record an attempt at the Level 2 solo
   - Revisit Level 1 scales and fretboard exercises before moving to Level 3
   - Continue refining bends in the solo
+
+### 2026-02-22 (2 hrs)
+
+- **What I worked on:** Recorded an attempt at the Level 2 solo "Feeling Blue in B Minor" — [Level 2 Solo Attempt](https://youtu.be/mRoDcpMfwI0?si=SlZAIZ-V0iZGktKO). Then went back into the Level 2 bonus content to work on triads up the neck on the B, G, and D strings, including sus2 and sus4 chords used to voice-lead between triad positions over a C–Am–Dm–G backing track. Cooled down with noodling and scale practice.
+- **How it went:** The solo recording was sloppy — bends are still horribly out of pitch and need a lot more work. The triad exercises were eye-opening but mentally taxing. Identifying every note of each triad in every position up the neck is a real brain workout — thinking in terms of chord tones and voice leading doesn't come naturally yet. The sus2/sus4 transitions between triads over the progression were a cool concept but hard to execute fluently.
+- **Key takeaways:**
+  - Bends are the #1 thing holding the Level 2 solo back — need dedicated bend practice (pitch accuracy, not just technique)
+  - Knowing the notes of triads in every position is foundational but my brain doesn't think in music theory terms yet — this will take repetition
+  - Voice leading with sus2/sus4 chords connecting triads is a powerful concept worth drilling
+- **Next session focus:**
+  - Keep practicing Level 1 and Level 2 material before moving to Level 3
+  - Dedicated bend practice — use a tuner to check pitch accuracy
+  - Continue drilling triad note identification up the neck
