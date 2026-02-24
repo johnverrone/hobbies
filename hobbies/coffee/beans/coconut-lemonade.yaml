@@ -12,5 +12,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 23
 notes: co-fermented with citrus, coconut, molasses, and sugar
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/coconut-lemonade.jpg
 created: 2024-04-30

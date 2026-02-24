@@ -10,5 +10,5 @@ single_origin: false
 currently_brewing: false
 price_12oz: null
 notes: Fall blend. “Notes of chocolate and blackberries to keep you warm as the crisp days of autumn shorten.”
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/moonrise.jpg
 created: 2023-11-27

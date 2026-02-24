@@ -10,5 +10,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 22
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/pueblo-libre.jpg
 created: 2023-08-04

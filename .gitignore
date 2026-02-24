@@ -19,6 +19,7 @@ server/src/generated/
 
 # misc
 .DS_Store
+.claude/settings.local.json
 
 # IDE
 .yarn/

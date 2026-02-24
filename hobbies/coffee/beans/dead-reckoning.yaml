@@ -12,5 +12,5 @@ single_origin: false
 currently_brewing: false
 price_12oz: null
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/dead-reckoning.jpg
 created: 2025-05-06

@@ -10,5 +10,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 20
 notes: Nicaragua. Los Pedernales. Jinotega
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/madrone-select-nicaragua.jpg
 created: 2022-07-19

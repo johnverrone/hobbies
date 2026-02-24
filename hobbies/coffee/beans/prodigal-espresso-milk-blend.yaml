@@ -11,5 +11,5 @@ single_origin: false
 currently_brewing: false
 price_12oz: 14.5
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/prodigal-espresso-milk-blend.jpg
 created: 2024-02-14

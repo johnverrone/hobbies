@@ -12,5 +12,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 21
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/prodigal-fruity.jpg
 created: 2024-02-10

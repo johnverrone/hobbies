@@ -12,5 +12,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: null
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/ceiba.jpg
 created: 2024-07-11

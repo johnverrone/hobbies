@@ -12,5 +12,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 19
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/covadonga.jpg
 created: 2023-05-20

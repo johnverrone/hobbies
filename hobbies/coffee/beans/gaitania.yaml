@@ -11,5 +11,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 17
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/gaitania.jpg
 created: 2022-07-12

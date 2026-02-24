@@ -11,5 +11,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 22
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/shakiso.jpg
 created: 2024-08-05

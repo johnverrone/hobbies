@@ -14,5 +14,5 @@ single_origin: false
 currently_brewing: false
 price_12oz: 16
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/tigerwalk.jpg
 created: 2022-08-25

@@ -12,5 +12,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 14
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/montes-tatama.jpg
 created: 2022-04-25

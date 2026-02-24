@@ -11,5 +11,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 23
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/pink-bourbon-natural.jpg
 created: 2024-04-30

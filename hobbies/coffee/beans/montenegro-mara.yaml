@@ -10,5 +10,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: null
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/montenegro-mara.jpg
 created: 2025-01-14

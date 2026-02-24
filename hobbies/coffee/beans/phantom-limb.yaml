@@ -9,5 +9,5 @@ single_origin: false
 currently_brewing: false
 price_12oz: 16.2
 notes: Really good blend for espresso
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/phantom-limb.jpg
 created: 2024-09-16

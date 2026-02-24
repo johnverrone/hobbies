@@ -12,5 +12,5 @@ single_origin: true
 currently_brewing: false
 price_12oz: 24
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/las-lajas-natural.jpg
 created: 2022-02-23

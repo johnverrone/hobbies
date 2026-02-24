@@ -13,5 +13,5 @@ single_origin: false
 currently_brewing: false
 price_12oz: null
 notes: ""
-image_url: ""
+image_url: https://storage.googleapis.com/johnverrone/coffee/phonograph.jpg
 created: 2024-04-01
