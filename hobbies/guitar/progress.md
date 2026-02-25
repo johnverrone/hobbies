@@ -84,3 +84,18 @@
   - Keep practicing Level 1 and Level 2 material before moving to Level 3
   - Dedicated bend practice — use a tuner to check pitch accuracy
   - Continue drilling triad note identification up the neck
+
+### 2026-02-24 (2 hrs)
+
+- **What I worked on:** Started with fretboard note recognition — picking a random note and playing major triads around every position. Completed the Level 2 bonus lesson on intervals, learning their positions relative to the root note across the entire fretboard. Nailed the ear training exercise. Started Level 3 (7th Chord Spice), learning maj7, min7, and dom7 chord shapes using barre chord voicings. Finished the session by picking up the drop D guitar and working on the intro to "Laid to Rest" by Lamb of God, using the Peavey 5150 + MSR overdrive NAM profile. Also improved the Ableton setup — created an "always monitoring" track with sends to reverb and recording tracks to avoid input monitoring issues during playback.
+- **How it went:** The triad exercise is paying off — fretboard visualization is noticeably improving. The intervals lesson and ear training went well, wrapping up Level 2 cleanly. Level 3's 7th chord shapes clicked quickly with the barre chord approach, so feeling confident there. The djent/metal detour was a fun way to close out the session — the 5150 profile absolutely rips for that style. The Ableton routing fix was a quality-of-life win that should make future sessions smoother.
+- **Key takeaways:**
+  - Fretboard knowledge is compounding — the triad + interval work is building real fluency
+  - Level 2 complete (including bonus content) — ready for Level 3
+  - 7th chord shapes are intuitive when built from barre chord foundations
+  - The Peavey 5150 + MSR overdrive profile is the go-to for high-gain/metal tones
+  - Still want a strat
+- **Next session focus:**
+  - Continue Level 3 — deeper into 7th chord applications and exercises
+  - Practice "Laid to Rest" intro — get the rhythm tighter
+  - Ear training — keep building on the interval recognition foundation

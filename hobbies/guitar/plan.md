@@ -16,8 +16,8 @@ Weekly progress recordings are saved in `guitar/recordings/` to track progressio
 | Weeks | Level   | Focus                       | Status      |
 | ----- | ------- | --------------------------- | ----------- |
 | 1–2   | Level 1 | Fretboard Fundamentals      | Done        |
-| 3–4   | Level 2 | Triads                      | In Progress |
-| 5–6   | Level 3 | 7 Chord Spice               |             |
+| 3–4   | Level 2 | Triads                      | Done        |
+| 5–6   | Level 3 | 7 Chord Spice               | In Progress |
 | 7–8   | Level 4 | Chord Embellishments        |             |
 | 9–10  | Level 5 | Dorian Domination           |             |
 | 11    | Level 6 | Jamming like Jimi (Hendrix) |             |
