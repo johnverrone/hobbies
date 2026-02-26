@@ -99,3 +99,16 @@
   - Continue Level 3 — deeper into 7th chord applications and exercises
   - Practice "Laid to Rest" intro — get the rhythm tighter
   - Ear training — keep building on the interval recognition foundation
+
+### 2026-02-25 (1.5 hrs)
+
+- **What I worked on:** Learned "So Far So Fake" by Pierce the Veil. Spent the first 10–15 minutes figuring out the bass notes by ear to determine the key and chord progression — landed on D minor. The intro melody is picked rather than strummed, which made identifying the progression trickier. Found the notes for the bridge riff. After that, looked up a tutorial and learned all the remaining parts of the song.
+- **How it went:** The ear training portion was a good challenge — the picked intro melody made it harder to hear the underlying chord movement, but working through it paid off. Once I had the key and bridge riff sorted, the tutorial filled in the gaps quickly and I got through all the parts in one session. The song isn't performance-ready yet — still need to dial in the tone and practice stringing all the sections together at tempo.
+- **Key takeaways:**
+  - Ear training is getting more practical — able to identify the key and find bass notes/riffs without tab
+  - Picked melodies over chord progressions are harder to analyze by ear than strummed chords
+  - Learning the structure first (key, progression, riffs) before looking up a tutorial makes the tutorial way more efficient
+- **Next session focus:**
+  - Dial in the tone for "So Far So Fake"
+  - Practice transitioning between sections at tempo
+  - Continue Level 3 material
