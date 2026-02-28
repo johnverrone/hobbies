@@ -112,3 +112,16 @@
   - Dial in the tone for "So Far So Fake"
   - Practice transitioning between sections at tempo
   - Continue Level 3 material
+
+### 2026-02-28 (1.5 hrs)
+
+- **What I worked on:** Downloaded more NAM tones and found a great combo — Boss OD-3 into a Fender Deluxe Reverb. Continued Next Level Playing with the next lesson, which focused on a triplet riff played through all 5 pentatonic positions. Revisited the Level 2 blues solo "Feeling Blue in B Minor." Closed out the session with a couple full playthroughs of "So Far So Fake" by Pierce the Veil.
+- **How it went:** The OD-3 into Deluxe Reverb profile is a killer little combo — really satisfying crunch tone. The triplet riff through all 5 pentatonic positions was a solid exercise for connecting the shapes. The Level 2 solo felt way cleaner this time around — was able to play it at tempo without much trouble, which is a nice confidence boost compared to the sloppy recording from a few days ago. "So Far So Fake" is coming together well — a couple parts still trip me up but overall it's a pretty easy song and it feels great to have something in the repertoire I can play start to end.
+- **Key takeaways:**
+  - Boss OD-3 + Fender Deluxe Reverb NAM combo is a new go-to clean/crunch tone
+  - Level 2 solo progress is real — bends and timing are noticeably improved
+  - Having a full song you can play through is a great motivator
+- **Next session focus:**
+  - Continue NLP triplet/pentatonic exercises
+  - Clean up the remaining rough spots in "So Far So Fake"
+  - Push forward with Level 3 material
