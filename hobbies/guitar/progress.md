@@ -125,3 +125,16 @@
   - Continue NLP triplet/pentatonic exercises
   - Clean up the remaining rough spots in "So Far So Fake"
   - Push forward with Level 3 material
+
+### 2026-03-02 (2 hrs)
+
+- **What I worked on:** Continued through NLP — hit Lesson 4 of Level 3, which covers minor scales. Practiced two run exercises that move across the neck through the minor scale positions, drilling them with a metronome. Revisited the 7th chord progressions from earlier in Level 3 and practiced transposing them to different keys. Mixed in noodling and chord practice between structured work. Set up the Line 6 FBV3 as a MIDI controller over USB in Ableton — built an audio effect rack with multiple NAM amps and pedals on different chains so I can switch amp presets and toggle delay, reverb, and overdrive via footswitch.
+- **How it went:** The minor scale runs are a good workout — moving across the neck forces you to connect the positions rather than staying in one box. The metronome kept things honest. Transposing the 7th chord progressions to different keys is getting smoother but still requires real thought — not automatic yet. The FBV3 MIDI setup was a huge quality-of-life upgrade — being able to switch tones and toggle effects hands-free makes practice feel way more like playing through a real rig.
+- **Key takeaways:**
+  - Minor scale runs across the neck are great for breaking out of single-position thinking
+  - Transposing 7th chord progressions is solid music theory practice — needs more reps to become fluent
+  - Line 6 FBV3 works as a USB MIDI controller — combined with Ableton effect racks, it's a legit pedalboard replacement
+- **Next session focus:**
+  - Continue drilling minor scale runs at increasing tempos
+  - Keep transposing 7th chord progressions — try less common keys
+  - Explore the FBV3 MIDI mapping further (expression pedal for volume/wah?)
