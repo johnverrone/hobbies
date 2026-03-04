@@ -159,6 +159,105 @@ songs:
     tab_link: "https://tabs.ultimate-guitar.com/tab/rush/limelight-tabs-100070"
     notes: "The iconic opening riff uses a mix of natural harmonics and open strings that requires precise right-hand technique — focus on getting clean harmonic tones at the 12th and 7th frets. The verse rhythm part features syncopated power chord patterns that lock in with Neil Peart's drumming, so practice with a metronome at a slower tempo before building up to full speed. Alex Lifeson's solo section involves quick position shifts and bends, so work through it in short phrases."
 
+  - title: "That's What You Get"
+    artist: "Paramore"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "D#/Eb"
+    tuning: "Drop D"
+    bpm: 162
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/paramore/thats-what-you-get-tabs-666918"
+    notes: "This song relies heavily on palm-muted power chords in Drop D tuning with fast downstroke picking — focus on keeping your muting tight and your rhythm locked to the driving tempo. The verse-to-chorus transitions have quick chord changes, so practice those shifts slowly before bringing them up to speed. Work on the intro riff separately, as it uses single-note lines with pull-offs that set the energy for the whole song."
+
+  - title: "The Middle"
+    artist: "Jimmy Eat World"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "D"
+    tuning: "Drop D"
+    bpm: 162
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/jimmy-eat-world/the-middle-tabs-337141"
+    notes: "The intro and verse use palm-muted single-note picking on the low D string that is instantly recognizable and satisfying to play. Practice the transition from tight muting to wide-open strumming for the chorus. The short guitar solo is melodic and approachable, built on simple bends and slides in the D major pentatonic scale."
+
+  - title: "Sugar, We're Goin Down"
+    artist: "Fall Out Boy"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "D"
+    tuning: "Half Step Down"
+    bpm: 161
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/fall-out-boy/sugar-were-going-down-tabs-174909"
+    notes: "The signature intro riff uses a repeating arpeggiated pattern across the D and G strings with hammer-ons that builds finger independence and accuracy. The verse and chorus rely on driving power chords with fast palm-muted downstrokes. Focus on getting the timing of the chord stabs in the pre-chorus tight, as they follow a syncopated rhythm that gives the song its punch."
+
+  - title: "Say It Ain't So"
+    artist: "Weezer"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "C#/Db"
+    tuning: "Half Step Down"
+    bpm: 76
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/weezer/say-it-aint-so-tabs-58945"
+    notes: "The intro clean arpeggio riff is one of the most iconic in 90s rock and is a great exercise for smooth chord-to-chord picking. Focus on the dynamic shift from quiet clean verses to the loud distorted chorus — excellent for practicing volume and gain control. The solo is melodic and approachable, staying mostly in one pentatonic box position with expressive bends."
+
+  - title: "Dirty Little Secret"
+    artist: "The All-American Rejects"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "A#/Bb"
+    tuning: "Standard (EADGBE)"
+    bpm: 144
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/the-all-american-rejects/dirty-little-secret-tabs-204397"
+    notes: "Built on a catchy power chord progression with a driving eighth-note strumming pattern that is pure pop-punk energy. The intro features a single-note melody line with a clean tone before the distortion kicks in — practice nailing that tone shift. The bridge has a fun rhythmic breakdown with staccato chord hits, great for developing tight muting control."
+
+  - title: "Fat Lip"
+    artist: "Sum 41"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "E"
+    tuning: "Standard (EADGBE)"
+    bpm: 198
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/sum-41/fat-lip-tabs-24343"
+    notes: "The main riff is built on chugging palm-muted power chords on the low E string with quick stabs up to higher chord shapes, perfect for practicing tight rhythm control and quick position shifts. Pay attention to the stops and starts throughout the arrangement, as the song frequently cuts to silence before kicking back in. The solo uses fast alternate picking and string bends — learn it in short phrases."
+
+  - title: "MakeDamnSure"
+    artist: "Taking Back Sunday"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "F#/Gb"
+    tuning: "Half Step Down"
+    bpm: 140
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/taking-back-sunday/makedamnsure-tabs-352636"
+    notes: "The instantly recognizable intro riff uses a repeating single-note pattern with octave shapes that is deceptively tricky to play cleanly at tempo — focus on muting strings you are not playing. The verse layers clean arpeggiated chords before exploding into distorted power chords for the chorus, great for practicing clean/dirty transitions. The bridge builds tension with sustained chords and feedback-style swells for working on dynamics."
+
+  - title: "The Kids Aren't Alright"
+    artist: "The Offspring"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "A#/Bb"
+    tuning: "Standard (EADGBE)"
+    bpm: 199
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/the-offspring/the-kids-arent-alright-tabs-5908"
+    notes: "The opening riff is a fast palm-muted single-note gallop that demands precise alternate picking and tight muting — start slow with a metronome and build up gradually. The verse and chorus use driving power chord progressions with aggressive downstroke strumming that will build your right-hand endurance. The guitar solo is melodic and within reach, using minor pentatonic runs with tasteful bends."
+
+  - title: "Dammit"
+    artist: "Blink-182"
+    difficulty: "Intermediate"
+    genre: "Rock"
+    key: "C"
+    tuning: "Standard (EADGBE)"
+    bpm: 220
+    progress: "Not Started"
+    tab_link: "https://tabs.ultimate-guitar.com/tab/blink-182/dammit-tabs-17951"
+    notes: "The main riff is one of the most iconic in pop-punk — a relentless power chord progression played with rapid downstrokes that will seriously build your right-hand endurance. The verse features a single-note bass-like riff on the low strings with palm muting that requires picking accuracy at speed. Start at around 160 BPM and gradually work up to the full 220."
+
   # --- Advanced ---
 
   - title: "Slow Dancing in a Burning Room"
