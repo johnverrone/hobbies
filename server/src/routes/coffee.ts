@@ -56,4 +56,5 @@ coffee.get("/roasters/:slug", (c) => {
   return c.json(roaster);
 });
 
+export { beans, roasters };
 export default coffee;

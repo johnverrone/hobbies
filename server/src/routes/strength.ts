@@ -33,4 +33,5 @@ strength.get("/plan", (c) => {
   return c.json({ content: planMd, source: "plan.md" });
 });
 
+export { prsData, progressMd as strengthProgressMd, planMd as strengthPlanMd };
 export default strength;

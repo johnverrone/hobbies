@@ -69,4 +69,5 @@ software.get("/goals", (c) => {
   return c.json({ content: goalsMd, source: "goals.md" });
 });
 
+export { projectsData, skillsData, ideasData, progressMd as softwareProgressMd, goalsMd };
 export default software;

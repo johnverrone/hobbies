@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import { mcpHandler } from './mcp'
 import guitar from './routes/guitar'
 import coffee from './routes/coffee'
 import software from './routes/software'
@@ -35,5 +36,7 @@ app.route('/strength', strength)
 app.route('/video', video)
 app.route('/photography', photography)
 app.route('/golf', golf)
+
+app.all('/mcp', (c) => mcpHandler(c))
 
 export default app
