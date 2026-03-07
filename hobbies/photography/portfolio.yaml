@@ -1,0 +1,25 @@
+portfolio:
+  storage_bucket: "gs://johnverrone-photos"
+
+  collections:
+    - title: "Lincoln Park Golden Hour"
+      slug: "lincoln-park-golden-hour-2026-03"
+      date: "2026-03-05"
+      category: "Landscape"
+      location: "Lincoln Park, Chicago, IL"
+      photos:
+        - file: "lincoln-park-sunset-01.jpg"
+          caption: "Sunset over the lagoon"
+        - file: "lincoln-park-sunset-02.jpg"
+          caption: "Polarized lake reflection"
+      notes: "Good light. The last 30 min before sunset were exceptional."
+
+    - title: "Wicker Park Street Walk"
+      slug: "street-wicker-park-2026-02"
+      date: "2026-02-08"
+      category: "Street"
+      location: "Wicker Park, Chicago, IL"
+      photos:
+        - file: "wicker-park-street-01.jpg"
+          caption: "Corner store neon"
+      notes: "9 keepers from 155 shots. Good haul for street."
