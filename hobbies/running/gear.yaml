@@ -1,0 +1,36 @@
+gear:
+  - name: "Nike Pegasus 41 #1"
+    slug: "pegasus-41-1"
+    type: "Training Shoe"
+    brand: "Nike"
+    model: "Pegasus 41"
+    acquired: "2026-01-10"
+    status: "Active"
+    mileage: 187
+    mileage_limit: 400
+    cost: 140
+    notes: "Daily trainer. Neutral, good for easy and tempo days."
+
+  - name: "Brooks Ghost 16 #1"
+    slug: "ghost-16-1"
+    type: "Training Shoe"
+    brand: "Brooks"
+    model: "Ghost 16"
+    acquired: "2025-08-20"
+    status: "Active"
+    mileage: 312
+    mileage_limit: 400
+    cost: 130
+    notes: "Getting close to retirement. Reserving for long runs only."
+
+  - name: "Garmin Forerunner 265"
+    slug: "garmin-265"
+    type: "Accessory"
+    brand: "Garmin"
+    model: "Forerunner 265"
+    acquired: "2025-03-15"
+    status: "Active"
+    mileage: null
+    mileage_limit: null
+    cost: 450
+    notes: "Primary GPS watch. Used for all runs."

@@ -1,0 +1,40 @@
+locations:
+  - name: "Lincoln Park — South Pond"
+    slug: "lincoln-park-south-pond"
+    city: "Chicago, IL"
+    type: "Landscape"
+    visited: true
+    best_season: "Fall"
+    best_time: "Golden Hour"
+    coordinates: "41.9141, -87.6337"
+    notes: "Reflections in the pond are incredible in fall. Also good for blue hour cityscape looking south."
+
+  - name: "The 606 Trail"
+    slug: "606-trail"
+    city: "Chicago, IL"
+    type: "Street"
+    visited: true
+    best_season: "Spring"
+    best_time: "Golden Hour"
+    coordinates: "41.9119, -87.6713"
+    notes: "Elevated trail through Wicker Park/Bucktown. Great for candid street work."
+
+  - name: "Millennium Park — Cloud Gate"
+    slug: "millennium-park-bean"
+    city: "Chicago, IL"
+    type: "Architecture"
+    visited: true
+    best_season: "Year-round"
+    best_time: "Blue Hour"
+    coordinates: "41.8826, -87.6233"
+    notes: "Iconic but crowded. Blue hour on a weeknight is the move — fewer tourists."
+
+  - name: "Palouse, Washington"
+    slug: "palouse-wa"
+    city: "Palouse Region, WA"
+    type: "Landscape"
+    visited: false
+    best_season: "Spring"
+    best_time: "Sunrise"
+    coordinates: "46.9, -117.6"
+    notes: "Rolling wheat fields. On the bucket list — need to time it for late May green fields."

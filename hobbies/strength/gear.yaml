@@ -1,0 +1,30 @@
+gear:
+  - name: "Rogue Ohio Bar"
+    slug: "rogue-ohio-bar"
+    type: "Barbell"
+    brand: "Rogue"
+    model: "Ohio Bar"
+    acquired: "2023-04-10"
+    status: "Active"
+    cost: 295
+    notes: "Primary bar for all compound lifts."
+
+  - name: "Inzer Forever Lever Belt"
+    slug: "inzer-lever-belt"
+    type: "Belt"
+    brand: "Inzer"
+    model: "Forever Lever Belt 10mm"
+    acquired: "2024-02-01"
+    status: "Active"
+    cost: 105
+    notes: "Use for any squat or deadlift above 85% effort."
+
+  - name: "Adidas Adipower II"
+    slug: "adidas-adipower-2"
+    type: "Shoes"
+    brand: "Adidas"
+    model: "Adipower II"
+    acquired: "2024-09-15"
+    status: "Active"
+    cost: 220
+    notes: "Heeled lifting shoes. Use for all squat variations."

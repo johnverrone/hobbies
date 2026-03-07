@@ -1,0 +1,51 @@
+projects:
+  - title: "Chicago Marathon Race Day Vlog"
+    slug: "chicago-marathon-vlog-2026"
+    type: "Personal"
+    platform: "YouTube"
+    status: "Planned"
+    shot_date: null
+    published_date: null
+    duration_min: null
+    channel: "main"
+    views: null
+    revenue_usd: null
+    gear_used:
+      - "Sony A7IV"
+      - "Sony 24-70mm f/2.8 GM"
+      - "GoPro Hero 12"
+    notes: "Want POV footage from GoPro on chest mount, plus b-roll around the course."
+
+  - title: "Gear Room Tour 2026"
+    slug: "gear-room-tour-2026"
+    type: "Personal"
+    platform: "YouTube"
+    status: "Published"
+    shot_date: "2026-01-20"
+    published_date: "2026-01-28"
+    duration_min: 18
+    channel: "main"
+    views: 4200
+    revenue_usd: 31
+    gear_used:
+      - "Sony A7IV"
+      - "Sony 85mm f/1.8"
+    notes: "Performed better than expected. Comments asked for follow-up on audio gear specifically."
+
+  - title: "Wedding Highlight Reel — Johnson/Lee"
+    slug: "wedding-johnson-lee-2026"
+    type: "Client"
+    platform: "Client Deliverable"
+    status: "Delivered"
+    shot_date: "2026-02-14"
+    published_date: null
+    duration_min: 5
+    channel: null
+    views: null
+    revenue_usd: 800
+    gear_used:
+      - "Sony A7IV"
+      - "Sony 24-70mm f/2.8 GM"
+      - "Sony 85mm f/1.8"
+      - "Rode Wireless GO II"
+    notes: "Second wedding client. Delivered on time. Requested referral at handoff."

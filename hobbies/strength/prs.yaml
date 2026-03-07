@@ -1,0 +1,28 @@
+prs:
+  - lift: "Squat"
+    weight_lbs: 265
+    reps: 1
+    type: "1RM"
+    date: "2025-12-14"
+    notes: "Paused squat. Belt on."
+
+  - lift: "Bench Press"
+    weight_lbs: 195
+    reps: 5
+    type: "Rep PR"
+    date: "2026-03-03"
+    notes: "Barely got the 5th rep. Next goal: 200x5."
+
+  - lift: "Deadlift"
+    weight_lbs: 315
+    reps: 1
+    type: "1RM"
+    date: "2026-01-20"
+    notes: "Conventional. Mixed grip. No belt."
+
+  - lift: "Overhead Press"
+    weight_lbs: 135
+    reps: 1
+    type: "1RM"
+    date: "2025-10-05"
+    notes: "Strict press. No leg drive."

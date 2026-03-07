@@ -1,0 +1,33 @@
+runs:
+  - date: "2026-03-06"
+    type: "Easy"
+    distance_mi: 5.2
+    duration_min: 49
+    pace_per_mi: "9:25"
+    heart_rate_avg: 142
+    shoes: "Nike Pegasus 41 #1"
+    route: "Neighborhood loop"
+    feel: "Good"
+    notes: "Felt strong after yesterday's rest. Kept HR in zone 2 the whole time."
+
+  - date: "2026-03-04"
+    type: "Tempo"
+    distance_mi: 6.0
+    duration_min: 51
+    pace_per_mi: "8:30"
+    heart_rate_avg: 163
+    shoes: "Nike Pegasus 41 #1"
+    route: "Riverside path"
+    feel: "Great"
+    notes: "2 mi warmup, 3 mi at tempo, 1 mi cooldown. Hit target pace for all 3 miles."
+
+  - date: "2026-02-22"
+    type: "Long"
+    distance_mi: 12.0
+    duration_min: 118
+    pace_per_mi: "9:50"
+    heart_rate_avg: 148
+    shoes: "Brooks Ghost 16 #1"
+    route: "Trail loop + road extension"
+    feel: "Okay"
+    notes: "Miles 9-11 felt heavy. Nutrition was off — forgot mid-run fuel."

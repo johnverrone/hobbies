@@ -1,0 +1,52 @@
+shoots:
+  - title: "Lincoln Park Golden Hour — March 2026"
+    slug: "lincoln-park-golden-hour-2026-03"
+    type: "Landscape"
+    date: "2026-03-05"
+    location: "Lincoln Park, Chicago, IL"
+    gear_used:
+      - "Sony A7IV"
+      - "Sony 24-70mm f/2.8 GM"
+    shots_taken: 210
+    keepers: 18
+    editing_status: "Done"
+    published: true
+    platform: "Instagram"
+    client: null
+    revenue_usd: null
+    notes: "Good light. The last 30 min before sunset were exceptional. Used a polarizer for the lake shots."
+
+  - title: "Sarah + Mike Engagement Session"
+    slug: "engagement-sarah-mike-2026"
+    type: "Client"
+    date: "2026-02-20"
+    location: "Millennium Park, Chicago, IL"
+    gear_used:
+      - "Sony A7IV"
+      - "Sony 85mm f/1.8"
+      - "Sony 24-70mm f/2.8 GM"
+    shots_taken: 480
+    keepers: 62
+    editing_status: "Done"
+    published: false
+    platform: null
+    client: "sarah-mike-engagement"
+    revenue_usd: 350
+    notes: "First paid portrait session. Gallery delivered via Pixieset."
+
+  - title: "Chicago Street Walk — Wicker Park"
+    slug: "street-wicker-park-2026-02"
+    type: "Street"
+    date: "2026-02-08"
+    location: "Wicker Park, Chicago, IL"
+    gear_used:
+      - "Sony A7IV"
+      - "Sony 35mm f/1.8"
+    shots_taken: 155
+    keepers: 9
+    editing_status: "Done"
+    published: true
+    platform: "Instagram"
+    client: null
+    revenue_usd: null
+    notes: "Keeper rate is lower on street — that's expected. 9 is actually a good haul."

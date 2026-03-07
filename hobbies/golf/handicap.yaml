@@ -1,0 +1,15 @@
+handicap_history:
+  - date: "2026-03-01"
+    index: 18.4
+    differential_count: 10
+    notes: "First official index established."
+
+  - date: "2025-11-01"
+    index: 21.2
+    differential_count: 8
+    notes: "End of 2025 season snapshot."
+
+  - date: "2025-06-01"
+    index: 24.0
+    differential_count: 5
+    notes: "Early season baseline."

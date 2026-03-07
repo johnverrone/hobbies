@@ -1,0 +1,18 @@
+clients:
+  - name: "Sarah & Mike"
+    slug: "sarah-mike-engagement"
+    type: "Engagement"
+    status: "Delivered"
+    date: "2026-02-20"
+    revenue_usd: 350
+    referral_source: "Instagram"
+    notes: "First paid client. Delivered on time. Requested they leave a review."
+
+  - name: "Bloom Café"
+    slug: "bloom-cafe"
+    type: "Commercial"
+    status: "Delivered"
+    date: "2026-01-10"
+    revenue_usd: 275
+    referral_source: "Cold outreach"
+    notes: "Product/interior shoot for their new menu. 3-hour session, 15 edited images delivered."

@@ -1,0 +1,50 @@
+gear:
+  - name: "Sony A7IV"
+    slug: "sony-a7iv"
+    category: "Camera Body"
+    brand: "Sony"
+    model: "A7IV"
+    acquired: "2024-06-01"
+    cost: 2498
+    status: "Active"
+    notes: "Primary camera. Use for all shoots."
+
+  - name: "Sony 24-70mm f/2.8 GM"
+    slug: "sony-24-70-gm"
+    category: "Lens"
+    brand: "Sony"
+    model: "FE 24-70mm f/2.8 GM"
+    acquired: "2024-09-15"
+    cost: 2298
+    status: "Active"
+    notes: "Workhorse zoom. First choice for events and run-and-gun."
+
+  - name: "Sony 85mm f/1.8"
+    slug: "sony-85-f18"
+    category: "Lens"
+    brand: "Sony"
+    model: "FE 85mm f/1.8"
+    acquired: "2024-03-20"
+    cost: 598
+    status: "Active"
+    notes: "Portrait and interview lens. Great value."
+
+  - name: "Rode Wireless GO II"
+    slug: "rode-wireless-go-ii"
+    category: "Audio"
+    brand: "Rode"
+    model: "Wireless GO II"
+    acquired: "2024-07-10"
+    cost: 299
+    status: "Active"
+    notes: "Essential for any talking-head or interview content."
+
+  - name: "GoPro Hero 12"
+    slug: "gopro-hero-12"
+    category: "Camera Body"
+    brand: "GoPro"
+    model: "Hero 12 Black"
+    acquired: "2025-04-01"
+    cost: 349
+    status: "Active"
+    notes: "Action/POV camera. Used for running races and adventure content."

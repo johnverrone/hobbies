@@ -1,0 +1,52 @@
+workouts:
+  - date: "2026-03-05"
+    type: "Lower"
+    program: "GZCLP"
+    bodyweight_lbs: 182
+    exercises:
+      - name: "Squat"
+        sets: 3
+        reps: 5
+        weight_lbs: 245
+        rpe: 8
+        notes: "Bar path felt off on set 2. Braced harder on set 3."
+      - name: "Romanian Deadlift"
+        sets: 3
+        reps: 8
+        weight_lbs: 155
+        rpe: 7
+        notes: null
+      - name: "Leg Press"
+        sets: 3
+        reps: 10
+        weight_lbs: 270
+        rpe: 6
+        notes: null
+    session_notes: "Legs were fried from Tuesday's run. Still hit all prescribed sets."
+    feel: "Okay"
+
+  - date: "2026-03-03"
+    type: "Upper"
+    program: "GZCLP"
+    bodyweight_lbs: 181
+    exercises:
+      - name: "Bench Press"
+        sets: 3
+        reps: 5
+        weight_lbs: 195
+        rpe: 9
+        notes: "PR attempt. Barely got rep 5 on set 3."
+      - name: "Barbell Row"
+        sets: 3
+        reps: 5
+        weight_lbs: 155
+        rpe: 7
+        notes: null
+      - name: "Overhead Press"
+        sets: 3
+        reps: 8
+        weight_lbs: 95
+        rpe: 8
+        notes: null
+    session_notes: "Bench PR day. Happy with the progress."
+    feel: "Great"

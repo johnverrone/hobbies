@@ -1,0 +1,48 @@
+rounds:
+  - date: "2026-03-01"
+    course: "harborside-international-port"
+    tees: "Blue"
+    holes: 18
+    score: 91
+    score_differential: 18.5
+    fairways_hit: 7
+    fairways_possible: 14
+    gir: 4
+    putts: 33
+    penalties: 2
+    feel: "Good"
+    playing_partners:
+      - "Dad"
+      - "Mike"
+    notes: "Best round of the year so far. Iron play was sharp. Putting let me down on 14 and 16 — both 3-putts from inside 15 feet."
+
+  - date: "2026-02-15"
+    course: "cog-hill-no-4"
+    tees: "White"
+    holes: 18
+    score: 97
+    score_differential: 24.0
+    fairways_hit: 5
+    fairways_possible: 14
+    gir: 2
+    putts: 36
+    penalties: 4
+    feel: "Okay"
+    playing_partners:
+      - "Work group"
+    notes: "Scramble format — scores aren't really comparable. Four penalties killed a decent front nine."
+
+  - date: "2026-01-20"
+    course: "harborside-international-starboard"
+    tees: "Blue"
+    holes: 9
+    score: 47
+    score_differential: null
+    fairways_hit: 3
+    fairways_possible: 7
+    gir: 1
+    putts: 19
+    penalties: 1
+    feel: "Rough"
+    playing_partners: []
+    notes: "Solo round after work. Cold and windy. Short game felt disconnected."

@@ -1,0 +1,26 @@
+last_updated: "2026-03-07"
+skills:
+  - domain: "TypeScript"
+    level: "Advanced"
+    confidence: 8
+    notes: "Strong in strict mode, generics, utility types. Weak on advanced mapped types."
+
+  - domain: "React"
+    level: "Advanced"
+    confidence: 7
+    notes: "Solid with hooks and context. Less experience with concurrent features."
+
+  - domain: "Cloudflare Workers / Edge Runtime"
+    level: "Intermediate"
+    confidence: 6
+    notes: "Comfortable with Hono + Workers. Still learning Durable Objects and KV at scale."
+
+  - domain: "AI / LLM Integration"
+    level: "Intermediate"
+    confidence: 5
+    notes: "Have used Claude and OpenAI APIs. Want to go deeper on agentic patterns."
+
+  - domain: "System Design"
+    level: "Intermediate"
+    confidence: 5
+    notes: "Can design for small-scale systems. Need more experience with distributed systems."

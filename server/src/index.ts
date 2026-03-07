@@ -2,6 +2,12 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import guitar from './routes/guitar'
 import coffee from './routes/coffee'
+import software from './routes/software'
+import running from './routes/running'
+import strength from './routes/strength'
+import video from './routes/video'
+import photography from './routes/photography'
+import golf from './routes/golf'
 
 const app = new Hono()
 
@@ -23,5 +29,11 @@ app.get('/', (c) => {
 
 app.route('/guitar', guitar)
 app.route('/coffee', coffee)
+app.route('/software', software)
+app.route('/running', running)
+app.route('/strength', strength)
+app.route('/video', video)
+app.route('/photography', photography)
+app.route('/golf', golf)
 
 export default app

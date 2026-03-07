@@ -1,0 +1,22 @@
+channels:
+  - name: "Main YouTube Channel"
+    slug: "youtube-main"
+    platform: "YouTube"
+    handle: "@johnverrone"
+    url: "https://youtube.com/@johnverrone"
+    subscribers: 1840
+    monetized: false
+    monetization_threshold: 1000
+    watch_hours: 2800
+    notes: "Growing slowly but consistently. Need to hit 4000 watch hours for YPP."
+
+  - name: "Instagram"
+    slug: "instagram-main"
+    platform: "Instagram"
+    handle: "@johnverrone"
+    url: "https://instagram.com/johnverrone"
+    subscribers: 620
+    monetized: false
+    monetization_threshold: null
+    watch_hours: null
+    notes: "Reposting video clips and photography. Low priority."

@@ -1,0 +1,31 @@
+last_updated: "2026-03-07"
+skills:
+  - area: "Driving"
+    level: "Intermediate"
+    confidence: 5
+    handicap_impact: "High"
+    notes: "Inconsistent off the tee. Fade is reliable but distance is below average. Working on hip rotation."
+
+  - area: "Iron Play"
+    level: "Intermediate"
+    confidence: 6
+    handicap_impact: "High"
+    notes: "7-iron down is solid. Long irons (3, 4) are difficult. Biggest area for score improvement."
+
+  - area: "Short Game (Chipping/Pitching)"
+    level: "Intermediate"
+    confidence: 5
+    handicap_impact: "High"
+    notes: "Up-and-down rate around 25%. Target 40%. Need to commit to one chipping method."
+
+  - area: "Putting"
+    level: "Intermediate"
+    confidence: 4
+    handicap_impact: "High"
+    notes: "3-putt rate is too high. Distance control from 15-30 feet is the main issue."
+
+  - area: "Course Management"
+    level: "Beginner"
+    confidence: 3
+    handicap_impact: "Medium"
+    notes: "Still too aggressive off the tee and into par 5s. Need to play more conservatively."
