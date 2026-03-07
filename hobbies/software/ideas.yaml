@@ -1,18 +1,8 @@
 ideas:
-  - title: "Habit streak tracker with SMS nudges"
-    captured: "2026-02-10"
-    spark: "Wanted something simpler than Habitica"
-    potential: "Medium"
-    monetizable: true
+  - title: "Habit tracker"
+    captured: "2026-03-06"
+    notes: ""
 
-  - title: "Local-first YAML editor for non-devs"
-    captured: "2026-01-28"
-    spark: "Family members can't edit my hobby data files"
-    potential: "High"
-    monetizable: true
-
-  - title: "CLI tool to summarize git commit history with AI"
-    captured: "2026-03-01"
-    spark: "Wanted changelogs without writing them"
-    potential: "Medium"
-    monetizable: false
+  - title: "AI terminal agent multiplexer"
+    captured: "2026-03-06"
+    notes: "Manage multiple Claude Code instances. Sorts by status (awaiting response vs working) so the user can prioritize sessions that need intervention."

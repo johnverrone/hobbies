@@ -1,5 +1,5 @@
 projects:
-  - title: "Hobby Tracker API"
+  - title: "Hobby Tracker API / Agent Database"
     slug: "hobby-tracker-api"
     status: "Active"
     type: "Personal"
@@ -8,60 +8,22 @@ projects:
       - "Hono"
       - "Cloudflare Workers"
     repo: "https://github.com/johnverrone/hobbies"
-    url: "https://api.johnverrone.com"
-    started: "2026-01-15"
-    shipped: null
-    revenue_model: "None"
-    mrr: 0
-    description: "REST API serving hobby tracking data as JSON from YAML files."
-    monetize_notes: "Could evolve into a template product for personal sites."
-    next_milestone: "Add MCP server layer"
+    description: "REST API serving hobby tracking data as JSON from YAML files. Future plans for AI agent layer and MCP server."
 
-  - title: "Run Pace Calculator"
-    slug: "run-pace-calculator"
-    status: "Shipped"
+  - title: "Personal Website"
+    slug: "personal-website"
+    status: "Active"
     type: "Personal"
     stack:
       - "React"
       - "TypeScript"
-    repo: "https://github.com/johnverrone/pace-calc"
-    url: "https://pace.johnverrone.com"
-    started: "2025-11-01"
-    shipped: "2025-12-03"
-    revenue_model: "None"
-    mrr: 0
-    description: "Simple tool to calculate target splits for race distances."
-    monetize_notes: null
-    next_milestone: null
+    url: "https://johnverrone.com"
+    description: "Portfolio, resume, and blog."
 
-  - title: "AI Receipt Parser"
-    slug: "ai-receipt-parser"
-    status: "Idea"
-    type: "SaaS"
-    stack: []
-    repo: null
-    url: null
-    started: null
-    shipped: null
-    revenue_model: "Subscription"
-    mrr: 0
-    description: "Upload a photo of a receipt; get structured expense data back."
-    monetize_notes: "Target freelancers and small businesses. $9/mo tier."
-    next_milestone: "Build prototype with Claude API"
-
-  - title: "Open Source: add streaming support to hono-zod-openapi"
-    slug: "oss-hono-zod-openapi-streaming"
-    status: "Idea"
-    type: "OSS"
+  - title: "Felt"
+    slug: "felt-ios"
+    status: "Active"
+    type: "Personal"
     stack:
-      - "TypeScript"
-      - "Hono"
-    repo: "https://github.com/honojs/middleware"
-    url: null
-    started: null
-    shipped: null
-    revenue_model: "None"
-    mrr: 0
-    description: "Upstream contribution to add streaming response types to the openapi middleware."
-    monetize_notes: null
-    next_milestone: "Read existing source and file an issue first"
+      - "Swift"
+    description: "iOS app. Early stage."

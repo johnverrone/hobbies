@@ -4,7 +4,6 @@ import projectsYaml from "@hobbies/software/projects.yaml";
 import skillsYaml from "@hobbies/software/skills.yaml";
 import ideasYaml from "@hobbies/software/ideas.yaml";
 import progressMd from "@hobbies/software/progress.md";
-import planMd from "@hobbies/software/plan.md";
 import goalsMd from "@hobbies/software/goals.md";
 
 type Project = {
@@ -13,39 +12,23 @@ type Project = {
   status: string;
   type: string;
   stack: string[];
-  repo: string | null;
-  url: string | null;
-  started: string | null;
-  shipped: string | null;
-  revenue_model: string;
-  mrr: number;
+  repo?: string;
+  url?: string;
   description: string;
-  monetize_notes: string | null;
-  next_milestone: string | null;
 };
 
 type ProjectsData = {
   projects: Project[];
 };
 
-type Skill = {
-  domain: string;
-  level: string;
-  confidence: number;
-  notes: string;
-};
-
 type SkillsData = {
-  last_updated: string;
-  skills: Skill[];
+  skills: string[];
 };
 
 type Idea = {
   title: string;
   captured: string;
-  spark: string;
-  potential: string;
-  monetizable: boolean;
+  notes: string;
 };
 
 type IdeasData = {
@@ -80,10 +63,6 @@ software.get("/ideas", (c) => {
 
 software.get("/progress", (c) => {
   return c.json({ content: progressMd, source: "progress.md" });
-});
-
-software.get("/plan", (c) => {
-  return c.json({ content: planMd, source: "plan.md" });
 });
 
 software.get("/goals", (c) => {
