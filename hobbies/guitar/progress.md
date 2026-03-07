@@ -2,6 +2,18 @@
 
 ## Week 3 — Level 3: Minor Scales
 
+### 2026-03-07 (1 hr)
+
+- **What I worked on:** Watched a YouTube video breaking down the basics of Math Rock guitar style — tapping, odd time signatures, and the general approach to the genre. Noodled around with some of those ideas afterward. Then spent time dialing in tones with the Neural DSP Cory Wong archetype plugin (trial), exploring its clean tone options and seeing what it could do.
+- **How it went:** Math Rock is super interesting — the style sounds cool and I can see it being a fun rabbit hole to explore further. The Cory Wong plugin has some really nice clean tones — was able to get some unique and cool sounds out of it. That said, it feels fairly specialized and not incredibly versatile from what I can tell so far. A solid plugin for that specific Cory Wong funky clean vibe, but probably not a Swiss army knife.
+- **Key takeaways:**
+  - Math Rock guitar style is worth exploring more — tapping, odd meters, and creative rhythmic ideas
+  - Neural DSP Cory Wong archetype has great cleans but seems niche — not a do-everything plugin
+  - Sometimes exploratory sessions like this are valuable even without structured practice
+- **Next session focus:**
+  - Back to NLP exercises with an updated recording
+  - Continue Level 3 minor scale material
+
 ### 2026-03-02 (2 hrs)
 
 - **What I worked on:** Continued through NLP — hit Lesson 4 of Level 3, which covers minor scales. Practiced two run exercises that move across the neck through the minor scale positions, drilling them with a metronome. Revisited the 7th chord progressions from earlier in Level 3 and practiced transposing them to different keys. Mixed in noodling and chord practice between structured work. Set up the Line 6 FBV3 as a MIDI controller over USB in Ableton — built an audio effect rack with multiple NAM amps and pedals on different chains so I can switch amp presets and toggle delay, reverb, and overdrive via footswitch.
