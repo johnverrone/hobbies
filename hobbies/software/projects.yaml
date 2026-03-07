@@ -10,6 +10,60 @@ projects:
     repo: "https://github.com/johnverrone/hobbies"
     description: "REST API serving hobby tracking data as JSON from YAML files. Future plans for AI agent layer and MCP server."
 
+  - title: "Hobby MCP Server"
+    slug: "hobby-mcp-server"
+    status: "Planned"
+    type: "Personal"
+    stack:
+      - "TypeScript"
+      - "MCP"
+      - "Claude API"
+      - "GitHub API"
+    repo: "https://github.com/johnverrone/hobbies"
+    description: |
+      MCP server that turns the hobbies repo into a living system via conversational AI.
+
+      ## Vision
+      Pull out your phone, send a message, and have the right YAML/md files
+      edited in a branch with a PR to merge into the repo.
+
+      ## Integration Tiers
+
+      ### Tier 1: Automated Pipelines (no human interaction)
+      - Strava webhook → GitHub Action → update running files, open PR
+      - Could extend to golf apps (Arccos, TheGrint)
+
+      ### Tier 2: Form-Based Entry (quick structured input)
+      - Coffee logging via website admin portal → POST to API → commit to repo
+      - Golf round entry via form
+
+      ### Tier 3: Conversational Assistant (the big unlock)
+      - MCP server exposes tools: read_hobby_data, update_file, create_pr
+      - Any MCP client can use it: Claude app (mobile), custom chat UI on
+        johnverrone.com, Claude Code skill, standalone app via Agent SDK
+      - Flow: message → Claude interprets → MCP tools read/edit files →
+        creates branch + PR → merge from phone or auto-merge
+
+      ## What Needs to Be Built
+      - MCP server wrapping repo data (read/write tools, git operations)
+      - GitHub App or PAT for branch/PR creation
+      - Strava webhook receiver (Cloudflare Worker)
+      - POST endpoints on existing API for form submissions (write to repo via GitHub API)
+
+  - title: "Strava Integration"
+    slug: "strava-integration"
+    status: "Planned"
+    type: "Personal"
+    stack:
+      - "TypeScript"
+      - "Cloudflare Workers"
+      - "Strava API"
+      - "GitHub API"
+    description: |
+      Webhook receiver that listens for Strava activity events and
+      automatically updates running data files in the hobbies repo.
+      Opens a PR for each update.
+
   - title: "Personal Website"
     slug: "personal-website"
     status: "Active"
