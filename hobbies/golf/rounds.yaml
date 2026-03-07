@@ -1,48 +1,120 @@
 rounds:
-  - date: "2026-03-01"
-    course: "harborside-international-port"
+  - date: "2025-12-14"
+    course: "Hiwan Golf Club"
     tees: "Blue"
+    rating: 70.0
+    slope: 134
     holes: 18
-    score: 91
-    score_differential: 18.5
-    fairways_hit: 7
-    fairways_possible: 14
+    score: 89
+    putts: 35
     gir: 4
-    putts: 33
-    penalties: 2
-    feel: "Good"
-    playing_partners:
-      - "Dad"
-      - "Mike"
-    notes: "Best round of the year so far. Iron play was sharp. Putting let me down on 14 and 16 — both 3-putts from inside 15 feet."
+    fir: 6
+    handicap_differential: 16.0
 
-  - date: "2026-02-15"
-    course: "cog-hill-no-4"
-    tees: "White"
+  - date: "2025-10-13"
+    course: "Hiwan Golf Club"
+    tees: "Blue"
+    rating: 70.0
+    slope: 134
+    holes: 18
+    score: 79
+    putts: 34
+    gir: 9
+    fir: 6
+    handicap_differential: 7.6
+
+  - date: "2025-10-06"
+    course: "City Park Golf Course"
+    tees: "Gold"
+    rating: 33.0
+    slope: 116
+    holes: 9
+    score: 42
+    putts: 17
+    gir: 2
+    fir: 4
+    handicap_differential: 17.5
+
+  - date: "2025-10-05"
+    course: "Legacy Ridge Golf Course"
+    tees: "Black"
+    rating: 70.4
+    slope: 128
+    holes: 18
+    score: 90
+    putts: 32
+    gir: 5
+    fir: 5
+    handicap_differential: 17.3
+
+  - date: "2025-10-03"
+    course: "Lake Valley Golf Club"
+    tees: "Blue"
+    rating: 70.3
+    slope: 134
+    holes: 18
+    score: 84
+    putts: 34
+    gir: 4
+    fir: 6
+    handicap_differential: 11.6
+
+  - date: "2025-09-28"
+    course: "Hiwan Golf Club"
+    tees: "Blue"
+    rating: 70.0
+    slope: 134
     holes: 18
     score: 97
-    score_differential: 24.0
-    fairways_hit: 5
-    fairways_possible: 14
-    gir: 2
-    putts: 36
-    penalties: 4
-    feel: "Okay"
-    playing_partners:
-      - "Work group"
-    notes: "Scramble format — scores aren't really comparable. Four penalties killed a decent front nine."
+    putts: 37
+    gir: 4
+    fir: 4
+    handicap_differential: 21.1
 
-  - date: "2026-01-20"
-    course: "harborside-international-starboard"
+  - date: "2025-08-02"
+    course: "Hiwan Golf Club"
     tees: "Blue"
-    holes: 9
-    score: 47
-    score_differential: null
-    fairways_hit: 3
-    fairways_possible: 7
-    gir: 1
-    putts: 19
-    penalties: 1
-    feel: "Rough"
-    playing_partners: []
-    notes: "Solo round after work. Cold and windy. Short game felt disconnected."
+    rating: 70.0
+    slope: 134
+    holes: 18
+    score: 85
+    putts: 28
+    gir: 3
+    fir: 5
+    handicap_differential: 11.8
+
+  - date: "2025-07-30"
+    course: "City Park Golf Course"
+    tees: "Bronze"
+    rating: 69.8
+    slope: 127
+    holes: 18
+    score: 86
+    putts: 36
+    gir: 7
+    fir: 9
+    handicap_differential: 14.4
+
+  - date: "2025-07-29"
+    course: "City Park Golf Course"
+    tees: "Bronze"
+    rating: 69.8
+    slope: 127
+    holes: 18
+    score: 85
+    putts: 36
+    gir: 8
+    fir: 5
+    handicap_differential: 13.5
+
+  - date: "2025-07-24"
+    course: "Riverdale Golf Course - Dunes"
+    tees: "Square"
+    rating: 70.3
+    slope: 126
+    holes: 18
+    score: 89
+    putts: 36
+    gir: 6
+    fir: 8
+    handicap_differential: 16.8

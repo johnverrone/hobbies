@@ -6,17 +6,14 @@ type Round = {
   date: string;
   course: string;
   tees: string;
+  rating: number;
+  slope: number;
   holes: number;
   score: number;
-  score_differential: number | null;
-  fairways_hit: number;
-  fairways_possible: number;
-  gir: number;
   putts: number;
-  penalties: number;
-  feel: string;
-  playing_partners: string[];
-  notes: string;
+  gir: number;
+  fir: number;
+  handicap_differential: number;
 };
 
 type RoundsData = {

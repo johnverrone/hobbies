@@ -1,10 +1,18 @@
 # Running Personal Records
 
-| Distance | Time | Date | Race |
-|----------|------|------|------|
-| 5K | 22:08 | 2025-11-27 | Turkey Trot 5K 2025 |
-| 10K | — | — | — |
-| Half Marathon | — | — | — |
-| Marathon | — | — | — |
+*Best efforts from Strava.*
 
-*Updated after each PR. Dashes indicate distance not yet raced.*
+| Distance | Time |
+|----------|------|
+| 400m | 1:03 |
+| 1/2 mile | 2:55 |
+| 1K | 3:46 |
+| 1 mile | 6:41 |
+| 2 mile | 13:41 |
+| 5K | 21:41 |
+| 10K | 47:53 |
+| 15K | 1:12:32 |
+| 10 mile | 1:17:51 |
+| 20K | 1:38:09 |
+| Half-Marathon | 1:43:42 |
+| Marathon | — |
