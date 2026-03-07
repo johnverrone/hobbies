@@ -1,0 +1,25 @@
+channels:
+  - name: "Main"
+    platform: "YouTube"
+    handle: "@johnverrone"
+    url: "https://youtube.com/@johnverrone"
+
+  - name: "Development"
+    platform: "YouTube"
+    handle: "@jvdev"
+    url: "https://youtube.com/@jvdev"
+
+  - name: "Guitar"
+    platform: "YouTube"
+    handle: "@jvshreds"
+    url: "https://youtube.com/@jvshreds"
+
+  - name: "Personal"
+    platform: "Instagram"
+    handle: "@johnverrone"
+    url: "https://instagram.com/johnverrone"
+
+  - name: "Family Travel"
+    platform: "Instagram"
+    handle: "@johnandmolly"
+    url: "https://instagram.com/johnandmolly"

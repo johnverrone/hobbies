@@ -1,0 +1,8 @@
+ideas:
+  - title: "Habit tracker"
+    captured: "2026-03-06"
+    notes: ""
+
+  - title: "AI terminal agent multiplexer"
+    captured: "2026-03-06"
+    notes: "Manage multiple Claude Code instances. Sorts by status (awaiting response vs working) so the user can prioritize sessions that need intervention."
