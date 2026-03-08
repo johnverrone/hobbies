@@ -28,4 +28,5 @@ golf.get("/rounds", (c) => {
   return c.json(roundsData);
 });
 
+export { roundsData };
 export default golf;

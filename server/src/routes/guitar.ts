@@ -38,4 +38,5 @@ guitar.get("/plan", (c) => {
   return c.json({ content: planMd, source: "plan.md" });
 });
 
+export { data as songsData, progressMd, planMd };
 export default guitar;

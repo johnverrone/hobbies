@@ -12,4 +12,5 @@ running.get("/prs", (c) => {
   return c.json({ content: prsMd, source: "prs.md" });
 });
 
+export { progressMd as runningProgressMd, prsMd };
 export default running;

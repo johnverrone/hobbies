@@ -51,4 +51,5 @@ video.get("/plan", (c) => {
   return c.json({ content: planMd, source: "plan.md" });
 });
 
+export { projectsData as videoProjectsData, ideasData as videoIdeasData, channelsData, progressMd as videoProgressMd, planMd as videoPlanMd };
 export default video;

@@ -57,4 +57,5 @@ photography.get("/inspiration", (c) => {
   return c.json(inspirationData);
 });
 
+export { portfolioData, inspirationData };
 export default photography;
