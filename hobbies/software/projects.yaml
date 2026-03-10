@@ -12,7 +12,7 @@ projects:
 
   - title: "Hobby MCP Server"
     slug: "hobby-mcp-server"
-    status: "Planned"
+    status: "Active"
     type: "Personal"
     stack:
       - "TypeScript"
