@@ -1,42 +1,15 @@
-import { Hono } from 'hono'
-import { cors } from 'hono/cors'
-import { mcpHandler } from './mcp'
-import guitar from './routes/guitar'
-import coffee from './routes/coffee'
-import software from './routes/software'
-import running from './routes/running'
-import strength from './routes/strength'
-import video from './routes/video'
-import photography from './routes/photography'
-import golf from './routes/golf'
+import OAuthProvider from "@cloudflare/workers-oauth-provider";
+import { HobbiesMCP } from "./mcp";
+import { GitHubHandler } from "./github-handler";
 
-const app = new Hono()
+// Re-export the Durable Object class so wrangler can find it
+export { HobbiesMCP };
 
-app.use(
-  '*',
-  cors({
-    origin: [
-      'https://johnverrone.com',
-      'https://www.johnverrone.com',
-      'http://localhost:5173',
-    ],
-    allowMethods: ['GET', 'OPTIONS'],
-  })
-)
-
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
-
-app.route('/guitar', guitar)
-app.route('/coffee', coffee)
-app.route('/software', software)
-app.route('/running', running)
-app.route('/strength', strength)
-app.route('/video', video)
-app.route('/photography', photography)
-app.route('/golf', golf)
-
-app.all('/mcp', (c) => mcpHandler(c))
-
-export default app
+export default new OAuthProvider({
+  apiHandler: HobbiesMCP.serve("/mcp"),
+  apiRoute: "/mcp",
+  authorizeEndpoint: "/authorize",
+  clientRegistrationEndpoint: "/register",
+  defaultHandler: GitHubHandler as any,
+  tokenEndpoint: "/token",
+});

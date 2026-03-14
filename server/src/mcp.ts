@@ -1,9 +1,9 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import { McpAgent } from "agents/mcp";
 import { z } from "zod";
-import type { Context } from "hono";
 import { updateFileAndCreatePR, commitFilesAndCreatePR, type FileToCommit } from "./github";
 import * as yaml from "yaml";
+import type { Props } from "./utils";
 
 // --- data imports from route modules (already parsed at module load) ---
 import { songsData, journalData as guitarJournal, planMd as guitarPlanMd, type JournalEntry } from "./routes/guitar";
@@ -73,307 +73,230 @@ const HOBBY_RESOURCES = Object.entries(RESOURCES).reduce(
 );
 
 // ---------------------------------------------------------------------------
-// Server factory — fresh McpServer instance per request (stateless)
+// MCP Agent — Durable Object that receives OAuth props (including GitHub token)
 // ---------------------------------------------------------------------------
 
-function createServer(githubToken?: string): McpServer {
-  const server = new McpServer({
+export class HobbiesMCP extends McpAgent<Env, Record<string, never>, Props> {
+  server = new McpServer({
     name: "hobbies",
     version: "1.0.0",
   });
 
-  // -------------------------------------------------------------------------
-  // Resources
-  // -------------------------------------------------------------------------
+  async init() {
+    const githubToken = this.props?.accessToken;
 
-  for (const [uri, entry] of Object.entries(RESOURCES)) {
-    const parts = uri.replace("hobby://", "").split("/");
-    const hobby = parts[0];
-    const resource = parts[1];
-    server.registerResource(
-      `${hobby}/${resource}`,
-      uri,
-      {
-        description: `${hobby} ${resource} data`,
-        mimeType: entry.mime,
-      },
-      async () => ({
-        contents: [
-          entry.mime === "text/markdown"
-            ? { uri, mimeType: entry.mime, text: entry.data as string }
-            : { uri, mimeType: entry.mime, text: JSON.stringify(entry.data, null, 2) },
-        ],
-      })
-    );
-  }
+    // -----------------------------------------------------------------------
+    // Resources
+    // -----------------------------------------------------------------------
 
-  // -------------------------------------------------------------------------
-  // General tools
-  // -------------------------------------------------------------------------
-
-  server.registerTool(
-    "list_hobby_resources",
-    {
-      description: "Lists all tracked hobbies and the data resources available for each. Call this first to understand what can be queried.",
-      inputSchema: {
-        hobby: z.string().optional().describe("Filter to a specific hobby. If omitted, lists all hobbies."),
-      },
-    },
-    async ({ hobby }) => {
-      const entries = hobby ? { [hobby]: HOBBY_RESOURCES[hobby] } : HOBBY_RESOURCES;
-
-      if (hobby && !HOBBY_RESOURCES[hobby]) {
-        return {
-          content: [{ type: "text" as const, text: `Unknown hobby: "${hobby}". Available: ${Object.keys(HOBBY_RESOURCES).join(", ")}` }],
-          isError: true,
-        };
-      }
-
-      const lines = Object.entries(entries).map(([h, r]) => {
-        const data = r.data.length
-          ? `Data:\n${r.data.map((d) => `  - ${d} (hobby://${h}/${d})`).join("\n")}`
-          : "Data: none yet";
-        const narratives = r.narratives.length
-          ? `Narratives:\n${r.narratives.map((n) => `  - ${n} (hobby://${h}/${n})`).join("\n")}`
-          : "";
-        return `**${h}**\n${data}${narratives ? `\n${narratives}` : ""}`;
-      });
-
-      return { content: [{ type: "text" as const, text: lines.join("\n\n") }] };
-    }
-  );
-
-  server.registerTool(
-    "read_hobby_data",
-    {
-      description: "Returns the full data for a specific hobby resource. Use list_hobby_resources to see what's available.",
-      inputSchema: {
-        hobby: z.string().describe("The hobby name (e.g. 'guitar', 'software', 'golf')"),
-        resource: z.string().describe("The resource name (e.g. 'songs', 'projects', 'rounds')"),
-      },
-    },
-    async ({ hobby, resource }) => {
-      const uri = `hobby://${hobby}/${resource}`;
-      const entry = RESOURCES[uri];
-      if (!entry) {
-        const available = Object.keys(RESOURCES)
-          .filter((k) => k.startsWith(`hobby://${hobby}/`))
-          .map((k) => k.replace(`hobby://${hobby}/`, ""));
-        const msg = available.length
-          ? `Unknown resource "${resource}" for hobby "${hobby}". Available: ${available.join(", ")}`
-          : `Unknown hobby "${hobby}". Available hobbies: ${Object.keys(HOBBY_RESOURCES).join(", ")}`;
-        return { content: [{ type: "text" as const, text: msg }], isError: true };
-      }
-      const text = entry.mime === "text/markdown"
-        ? (entry.data as string)
-        : JSON.stringify(entry.data, null, 2);
-      return { content: [{ type: "text" as const, text }] };
-    }
-  );
-
-  server.registerTool(
-    "read_hobby_narrative",
-    {
-      description: "Returns the markdown content of a hobby narrative file (progress log, plan, goals, prs, etc.).",
-      inputSchema: {
-        hobby: z.string().describe("The hobby name"),
-        file: z.string().describe("The file name without extension (e.g. 'progress', 'plan', 'goals', 'prs')"),
-      },
-    },
-    async ({ hobby, file }) => {
-      const uri = `hobby://${hobby}/${file}`;
-      const entry = RESOURCES[uri];
-      if (!entry || entry.mime !== "text/markdown") {
-        const available = Object.keys(RESOURCES)
-          .filter((k) => k.startsWith(`hobby://${hobby}/`) && RESOURCES[k].mime === "text/markdown")
-          .map((k) => k.replace(`hobby://${hobby}/`, ""));
-        const msg = available.length
-          ? `"${file}" is not a narrative for "${hobby}". Narratives: ${available.join(", ")}`
-          : `Unknown hobby "${hobby}". Available: ${Object.keys(HOBBY_RESOURCES).join(", ")}`;
-        return { content: [{ type: "text" as const, text: msg }], isError: true };
-      }
-      return { content: [{ type: "text" as const, text: entry.data as string }] };
-    }
-  );
-
-  // -------------------------------------------------------------------------
-  // Convenience tools
-  // -------------------------------------------------------------------------
-
-  server.registerTool(
-    "get_active_projects",
-    {
-      description: "Returns software projects filtered by status. Defaults to all non-Abandoned projects.",
-      inputSchema: {
-        status: z.string().optional().describe("Filter to a specific status: 'Idea', 'Active', 'Shipped', 'Paused', 'Abandoned'. If omitted, returns all except Abandoned."),
-      },
-    },
-    async ({ status }) => {
-      const projects = projectsData.projects.filter((p) =>
-        status ? p.status === status : p.status !== "Abandoned"
+    for (const [uri, entry] of Object.entries(RESOURCES)) {
+      const parts = uri.replace("hobby://", "").split("/");
+      const hobby = parts[0];
+      const resource = parts[1];
+      this.server.registerResource(
+        `${hobby}/${resource}`,
+        uri,
+        {
+          description: `${hobby} ${resource} data`,
+          mimeType: entry.mime,
+        },
+        async () => ({
+          contents: [
+            entry.mime === "text/markdown"
+              ? { uri, mimeType: entry.mime, text: entry.data as string }
+              : { uri, mimeType: entry.mime, text: JSON.stringify(entry.data, null, 2) },
+          ],
+        }),
       );
-      return { content: [{ type: "text" as const, text: JSON.stringify(projects, null, 2) }] };
     }
-  );
 
-  server.registerTool(
-    "get_golf_stats",
-    {
-      description: "Returns golf round statistics: scoring average, avg putts, avg GIR, avg FIR, and an estimated handicap index computed from score differentials.",
-      inputSchema: {
-        limit: z.number().int().min(1).max(50).optional().describe("Number of most recent rounds to include. Defaults to all rounds."),
+    // -----------------------------------------------------------------------
+    // General tools
+    // -----------------------------------------------------------------------
+
+    this.server.registerTool(
+      "list_hobby_resources",
+      {
+        description: "Lists all tracked hobbies and the data resources available for each. Call this first to understand what can be queried.",
+        inputSchema: {
+          hobby: z.string().optional().describe("Filter to a specific hobby. If omitted, lists all hobbies."),
+        },
       },
-    },
-    async ({ limit }) => {
-      const rounds = limit ? roundsData.rounds.slice(0, limit) : roundsData.rounds;
+      async ({ hobby }) => {
+        const entries = hobby ? { [hobby]: HOBBY_RESOURCES[hobby] } : HOBBY_RESOURCES;
 
-      if (rounds.length === 0) {
-        return { content: [{ type: "text" as const, text: "No rounds recorded yet." }] };
-      }
+        if (hobby && !HOBBY_RESOURCES[hobby]) {
+          return {
+            content: [{ type: "text" as const, text: `Unknown hobby: "${hobby}". Available: ${Object.keys(HOBBY_RESOURCES).join(", ")}` }],
+            isError: true,
+          };
+        }
 
-      const avg = (vals: number[]) =>
-        Math.round((vals.reduce((a, b) => a + b, 0) / vals.length) * 10) / 10;
-
-      const fullRounds = rounds.filter((r) => r.holes === 18);
-
-      // WHS handicap: best 8 of last 20 differentials (or fewer if < 20 available)
-      const differentials = fullRounds.map((r) => r.handicap_differential).sort((a, b) => a - b);
-      const bestCount = Math.min(8, Math.ceil(differentials.length * 0.4));
-      const handicapIndex = bestCount > 0
-        ? Math.round(avg(differentials.slice(0, bestCount)) * 0.96 * 10) / 10
-        : null;
-
-      const stats = {
-        rounds_total: rounds.length,
-        rounds_18_hole: fullRounds.length,
-        scoring_avg: avg(rounds.map((r) => r.score)),
-        putts_avg: avg(rounds.map((r) => r.putts)),
-        gir_avg: avg(rounds.map((r) => r.gir)),
-        fir_avg: avg(rounds.map((r) => r.fir)),
-        estimated_handicap_index: handicapIndex,
-        note: handicapIndex !== null
-          ? `Computed from best ${bestCount} of ${fullRounds.length} 18-hole differentials (×0.96 playing conditions factor)`
-          : "Not enough 18-hole rounds to estimate handicap",
-      };
-
-      return { content: [{ type: "text" as const, text: JSON.stringify(stats, null, 2) }] };
-    }
-  );
-
-  // -------------------------------------------------------------------------
-  // Write tools
-  // -------------------------------------------------------------------------
-
-  server.registerTool(
-    "update_hobby_file",
-    {
-      description:
-        "Updates a hobby data file (YAML or markdown) by creating a branch, committing the change, and opening a pull request. " +
-        "Use read_hobby_data or read_hobby_narrative first to get the current content, then pass the full updated content here. " +
-        "For individual coffee files, use resource paths like 'beans/<slug>' or 'roasters/<slug>' " +
-        "(e.g. resource='beans/gujoo-uraga-natural' maps to hobbies/coffee/beans/gujoo-uraga-natural.yaml). " +
-        "This same pattern works for any hobby subdirectory: '<subdir>/<slug>'.",
-      inputSchema: {
-        hobby: z.string().describe("The hobby name (e.g. 'guitar', 'software', 'coffee')"),
-        resource: z.string().describe(
-          "The resource name. For top-level resources: 'songs', 'journal', 'plan'. " +
-          "For individual files in a subdirectory: 'beans/<slug>', 'roasters/<slug>', or 'journal/<date>' " +
-          "(e.g. 'beans/gujoo-uraga-natural', 'journal/2026-03-14'). Journal entries use .md extension."
-        ),
-        content: z.string().describe("The full updated file content"),
-        commit_message: z.string().describe("A short commit message describing the change"),
-        pr_title: z.string().describe("Pull request title"),
-        pr_body: z.string().optional().describe("Optional pull request body/description"),
-      },
-    },
-    async ({ hobby, resource, content, commit_message, pr_title, pr_body }) => {
-      if (!githubToken) {
-        return {
-          content: [{ type: "text" as const, text: "Write operations require a GITHUB_TOKEN secret to be configured on the worker." }],
-          isError: true,
-        };
-      }
-
-      const uri = `hobby://${hobby}/${resource}`;
-      const entry = RESOURCES[uri];
-
-      if (entry?.generated) {
-        return {
-          content: [{ type: "text" as const, text: `"${hobby}/${resource}" is auto-generated from source YAML files and cannot be modified directly. Use individual resource paths like 'beans/<slug>' or 'roasters/<slug>' to update specific entries.` }],
-          isError: true,
-        };
-      }
-
-      // Determine file path: prefer registry entry, then fall back to
-      // constructing a path for individual files (e.g. beans/<slug> → hobbies/coffee/beans/<slug>.yaml)
-      // Journal entries use .md extension; everything else defaults to .yaml
-      let filePath: string;
-      if (entry) {
-        filePath = entry.filePath;
-      } else if (/^[a-z][a-z0-9-]*\/[a-z0-9][a-z0-9-]*$/.test(resource)) {
-        const ext = resource.startsWith("journal/") ? ".md" : ".yaml";
-        filePath = `hobbies/${hobby}/${resource}${ext}`;
-      } else {
-        return {
-          content: [{ type: "text" as const, text: `Unknown resource "${resource}" for hobby "${hobby}". Use list_hobby_resources to see available resources, or use 'subdir/slug' format for individual files.` }],
-          isError: true,
-        };
-      }
-
-      try {
-        const result = await updateFileAndCreatePR({
-          token: githubToken,
-          filePath,
-          newContent: content,
-          commitMessage: commit_message,
-          prTitle: pr_title,
-          prBody: pr_body ?? "",
+        const lines = Object.entries(entries).map(([h, r]) => {
+          const data = r.data.length
+            ? `Data:\n${r.data.map((d) => `  - ${d} (hobby://${h}/${d})`).join("\n")}`
+            : "Data: none yet";
+          const narratives = r.narratives.length
+            ? `Narratives:\n${r.narratives.map((n) => `  - ${n} (hobby://${h}/${n})`).join("\n")}`
+            : "";
+          return `**${h}**\n${data}${narratives ? `\n${narratives}` : ""}`;
         });
-        return {
-          content: [{
-            type: "text" as const,
-            text: `PR created: ${result.prUrl}\nBranch: ${result.branch}`,
-          }],
-        };
-      } catch (err) {
-        return {
-          content: [{ type: "text" as const, text: `Failed to create PR: ${err instanceof Error ? err.message : String(err)}` }],
-          isError: true,
-        };
-      }
-    }
-  );
 
-  server.registerTool(
-    "batch_update_hobby_files",
-    {
-      description:
-        "Commits multiple hobby file updates in a single branch and pull request. " +
-        "Use this instead of calling update_hobby_file repeatedly when you need to edit more than one file. " +
-        "Supports the same resource path formats: top-level names (e.g. 'songs', 'progress') or " +
-        "subdirectory slugs (e.g. 'beans/gujoo-uraga-natural', 'roasters/madrone-coffee-co').",
-      inputSchema: {
-        updates: z.array(z.object({
-          hobby: z.string().describe("The hobby name (e.g. 'coffee', 'guitar')"),
-          resource: z.string().describe("The resource name or 'subdir/slug' path (e.g. 'beans/gujoo-uraga-natural')"),
-          content: z.string().describe("The full updated file content"),
-        })).min(1).describe("List of files to update in this single commit"),
-        commit_message: z.string().describe("A short commit message describing all the changes"),
-        pr_title: z.string().describe("Pull request title"),
-        pr_body: z.string().optional().describe("Optional pull request body/description"),
+        return { content: [{ type: "text" as const, text: lines.join("\n\n") }] };
       },
-    },
-    async ({ updates, commit_message, pr_title, pr_body }) => {
-      if (!githubToken) {
-        return {
-          content: [{ type: "text" as const, text: "Write operations require a GITHUB_TOKEN secret to be configured on the worker." }],
-          isError: true,
-        };
-      }
+    );
 
-      // Resolve all file paths up front — fail fast if any are invalid
-      const files: { path: string; content: string }[] = [];
-      for (const { hobby, resource, content } of updates) {
+    this.server.registerTool(
+      "read_hobby_data",
+      {
+        description: "Returns the full data for a specific hobby resource. Use list_hobby_resources to see what's available.",
+        inputSchema: {
+          hobby: z.string().describe("The hobby name (e.g. 'guitar', 'software', 'golf')"),
+          resource: z.string().describe("The resource name (e.g. 'songs', 'projects', 'rounds')"),
+        },
+      },
+      async ({ hobby, resource }) => {
+        const uri = `hobby://${hobby}/${resource}`;
+        const entry = RESOURCES[uri];
+        if (!entry) {
+          const available = Object.keys(RESOURCES)
+            .filter((k) => k.startsWith(`hobby://${hobby}/`))
+            .map((k) => k.replace(`hobby://${hobby}/`, ""));
+          const msg = available.length
+            ? `Unknown resource "${resource}" for hobby "${hobby}". Available: ${available.join(", ")}`
+            : `Unknown hobby "${hobby}". Available hobbies: ${Object.keys(HOBBY_RESOURCES).join(", ")}`;
+          return { content: [{ type: "text" as const, text: msg }], isError: true };
+        }
+        const text = entry.mime === "text/markdown"
+          ? (entry.data as string)
+          : JSON.stringify(entry.data, null, 2);
+        return { content: [{ type: "text" as const, text }] };
+      },
+    );
+
+    this.server.registerTool(
+      "read_hobby_narrative",
+      {
+        description: "Returns the markdown content of a hobby narrative file (progress log, plan, goals, prs, etc.).",
+        inputSchema: {
+          hobby: z.string().describe("The hobby name"),
+          file: z.string().describe("The file name without extension (e.g. 'progress', 'plan', 'goals', 'prs')"),
+        },
+      },
+      async ({ hobby, file }) => {
+        const uri = `hobby://${hobby}/${file}`;
+        const entry = RESOURCES[uri];
+        if (!entry || entry.mime !== "text/markdown") {
+          const available = Object.keys(RESOURCES)
+            .filter((k) => k.startsWith(`hobby://${hobby}/`) && RESOURCES[k].mime === "text/markdown")
+            .map((k) => k.replace(`hobby://${hobby}/`, ""));
+          const msg = available.length
+            ? `"${file}" is not a narrative for "${hobby}". Narratives: ${available.join(", ")}`
+            : `Unknown hobby "${hobby}". Available: ${Object.keys(HOBBY_RESOURCES).join(", ")}`;
+          return { content: [{ type: "text" as const, text: msg }], isError: true };
+        }
+        return { content: [{ type: "text" as const, text: entry.data as string }] };
+      },
+    );
+
+    // -----------------------------------------------------------------------
+    // Convenience tools
+    // -----------------------------------------------------------------------
+
+    this.server.registerTool(
+      "get_active_projects",
+      {
+        description: "Returns software projects filtered by status. Defaults to all non-Abandoned projects.",
+        inputSchema: {
+          status: z.string().optional().describe("Filter to a specific status: 'Idea', 'Active', 'Shipped', 'Paused', 'Abandoned'. If omitted, returns all except Abandoned."),
+        },
+      },
+      async ({ status }) => {
+        const projects = projectsData.projects.filter((p) =>
+          status ? p.status === status : p.status !== "Abandoned",
+        );
+        return { content: [{ type: "text" as const, text: JSON.stringify(projects, null, 2) }] };
+      },
+    );
+
+    this.server.registerTool(
+      "get_golf_stats",
+      {
+        description: "Returns golf round statistics: scoring average, avg putts, avg GIR, avg FIR, and an estimated handicap index computed from score differentials.",
+        inputSchema: {
+          limit: z.number().int().min(1).max(50).optional().describe("Number of most recent rounds to include. Defaults to all rounds."),
+        },
+      },
+      async ({ limit }) => {
+        const rounds = limit ? roundsData.rounds.slice(0, limit) : roundsData.rounds;
+
+        if (rounds.length === 0) {
+          return { content: [{ type: "text" as const, text: "No rounds recorded yet." }] };
+        }
+
+        const avg = (vals: number[]) =>
+          Math.round((vals.reduce((a, b) => a + b, 0) / vals.length) * 10) / 10;
+
+        const fullRounds = rounds.filter((r) => r.holes === 18);
+
+        // WHS handicap: best 8 of last 20 differentials (or fewer if < 20 available)
+        const differentials = fullRounds.map((r) => r.handicap_differential).sort((a, b) => a - b);
+        const bestCount = Math.min(8, Math.ceil(differentials.length * 0.4));
+        const handicapIndex = bestCount > 0
+          ? Math.round(avg(differentials.slice(0, bestCount)) * 0.96 * 10) / 10
+          : null;
+
+        const stats = {
+          rounds_total: rounds.length,
+          rounds_18_hole: fullRounds.length,
+          scoring_avg: avg(rounds.map((r) => r.score)),
+          putts_avg: avg(rounds.map((r) => r.putts)),
+          gir_avg: avg(rounds.map((r) => r.gir)),
+          fir_avg: avg(rounds.map((r) => r.fir)),
+          estimated_handicap_index: handicapIndex,
+          note: handicapIndex !== null
+            ? `Computed from best ${bestCount} of ${fullRounds.length} 18-hole differentials (×0.96 playing conditions factor)`
+            : "Not enough 18-hole rounds to estimate handicap",
+        };
+
+        return { content: [{ type: "text" as const, text: JSON.stringify(stats, null, 2) }] };
+      },
+    );
+
+    // -----------------------------------------------------------------------
+    // Write tools — use the authenticated user's GitHub token from OAuth
+    // -----------------------------------------------------------------------
+
+    this.server.registerTool(
+      "update_hobby_file",
+      {
+        description:
+          "Updates a hobby data file (YAML or markdown) by creating a branch, committing the change, and opening a pull request. " +
+          "Use read_hobby_data or read_hobby_narrative first to get the current content, then pass the full updated content here. " +
+          "For individual coffee files, use resource paths like 'beans/<slug>' or 'roasters/<slug>' " +
+          "(e.g. resource='beans/gujoo-uraga-natural' maps to hobbies/coffee/beans/gujoo-uraga-natural.yaml). " +
+          "This same pattern works for any hobby subdirectory: '<subdir>/<slug>'.",
+        inputSchema: {
+          hobby: z.string().describe("The hobby name (e.g. 'guitar', 'software', 'coffee')"),
+          resource: z.string().describe(
+            "The resource name. For top-level resources: 'songs', 'journal', 'plan'. " +
+            "For individual files in a subdirectory: 'beans/<slug>', 'roasters/<slug>', or 'journal/<date>' " +
+            "(e.g. 'beans/gujoo-uraga-natural', 'journal/2026-03-14'). Journal entries use .md extension.",
+          ),
+          content: z.string().describe("The full updated file content"),
+          commit_message: z.string().describe("A short commit message describing the change"),
+          pr_title: z.string().describe("Pull request title"),
+          pr_body: z.string().optional().describe("Optional pull request body/description"),
+        },
+      },
+      async ({ hobby, resource, content, commit_message, pr_title, pr_body }) => {
+        if (!githubToken) {
+          return {
+            content: [{ type: "text" as const, text: "Write operations require GitHub authentication. Please reconnect with OAuth." }],
+            isError: true,
+          };
+        }
+
         const uri = `hobby://${hobby}/${resource}`;
         const entry = RESOURCES[uri];
 
@@ -384,6 +307,9 @@ function createServer(githubToken?: string): McpServer {
           };
         }
 
+        // Determine file path: prefer registry entry, then fall back to
+        // constructing a path for individual files (e.g. beans/<slug> → hobbies/coffee/beans/<slug>.yaml)
+        // Journal entries use .md extension; everything else defaults to .yaml
         let filePath: string;
         if (entry) {
           filePath = entry.filePath;
@@ -396,184 +322,246 @@ function createServer(githubToken?: string): McpServer {
             isError: true,
           };
         }
-        files.push({ path: filePath, content });
-      }
 
-      try {
-        const result = await commitFilesAndCreatePR({
-          token: githubToken,
-          files,
-          commitMessage: commit_message,
-          prTitle: pr_title,
-          prBody: pr_body ?? "",
-        });
-        return {
-          content: [{
-            type: "text" as const,
-            text: `PR created: ${result.prUrl}\nBranch: ${result.branch}\nFiles updated: ${files.map((f) => f.path).join(", ")}`,
-          }],
-        };
-      } catch (err) {
-        return {
-          content: [{ type: "text" as const, text: `Failed to create PR: ${err instanceof Error ? err.message : String(err)}` }],
-          isError: true,
-        };
-      }
-    }
-  );
-
-  // -------------------------------------------------------------------------
-  // Coffee upsert tool
-  // -------------------------------------------------------------------------
-
-  server.registerTool(
-    "upsert_coffee",
-    {
-      description:
-        "Creates or updates a coffee bean entry by committing YAML and image files to GitHub and opening a PR. " +
-        "Optionally creates a new roaster if one doesn't exist yet.",
-      inputSchema: {
-        name: z.string().describe("Bean name (e.g. 'Tropical Weather')"),
-        slug: z.string().describe("URL-safe slug (e.g. 'tropical-weather')"),
-        roaster_slug: z.string().describe("Slug of the roaster (must exist unless new_roaster is provided)"),
-        rating: z.number().min(1).max(5).optional().describe("Rating from 1-5"),
-        origins: z.array(z.string()).describe("List of origin countries"),
-        flavors: z.array(z.string()).optional().describe("Flavor notes"),
-        process: z.string().optional().describe("Processing method (e.g. 'Washed', 'Natural')"),
-        single_origin: z.boolean().describe("Whether this is a single origin coffee"),
-        currently_brewing: z.boolean().optional().describe("Whether this is currently being brewed"),
-        price_12oz: z.number().optional().describe("Price per 12oz bag in USD"),
-        notes: z.string().optional().describe("Additional notes"),
-        image_base64: z.string().describe("Base64-encoded JPEG image of the coffee bag"),
-        new_roaster: z.object({
-          name: z.string().describe("Roaster display name"),
-          slug: z.string().describe("Roaster slug"),
-          location: z.string().optional().describe("City, State"),
-          website: z.string().optional().describe("Website URL"),
-          notes: z.string().optional().describe("Notes about the roaster"),
-        }).optional().describe("Provide this to create a new roaster alongside the bean"),
+        try {
+          const result = await updateFileAndCreatePR({
+            token: githubToken,
+            filePath,
+            newContent: content,
+            commitMessage: commit_message,
+            prTitle: pr_title,
+            prBody: pr_body ?? "",
+          });
+          return {
+            content: [{
+              type: "text" as const,
+              text: `PR created: ${result.prUrl}\nBranch: ${result.branch}`,
+            }],
+          };
+        } catch (err) {
+          return {
+            content: [{ type: "text" as const, text: `Failed to create PR: ${err instanceof Error ? err.message : String(err)}` }],
+            isError: true,
+          };
+        }
       },
-    },
-    async ({ name, slug, roaster_slug, rating, origins, flavors, process, single_origin, currently_brewing, price_12oz, notes, image_base64, new_roaster }) => {
-      if (!githubToken) {
-        return {
-          content: [{ type: "text" as const, text: "Write operations require a GITHUB_TOKEN secret to be configured on the worker." }],
-          isError: true,
+    );
+
+    this.server.registerTool(
+      "batch_update_hobby_files",
+      {
+        description:
+          "Commits multiple hobby file updates in a single branch and pull request. " +
+          "Use this instead of calling update_hobby_file repeatedly when you need to edit more than one file. " +
+          "Supports the same resource path formats: top-level names (e.g. 'songs', 'progress') or " +
+          "subdirectory slugs (e.g. 'beans/gujoo-uraga-natural', 'roasters/madrone-coffee-co').",
+        inputSchema: {
+          updates: z.array(z.object({
+            hobby: z.string().describe("The hobby name (e.g. 'coffee', 'guitar')"),
+            resource: z.string().describe("The resource name or 'subdir/slug' path (e.g. 'beans/gujoo-uraga-natural')"),
+            content: z.string().describe("The full updated file content"),
+          })).min(1).describe("List of files to update in this single commit"),
+          commit_message: z.string().describe("A short commit message describing all the changes"),
+          pr_title: z.string().describe("Pull request title"),
+          pr_body: z.string().optional().describe("Optional pull request body/description"),
+        },
+      },
+      async ({ updates, commit_message, pr_title, pr_body }) => {
+        if (!githubToken) {
+          return {
+            content: [{ type: "text" as const, text: "Write operations require GitHub authentication. Please reconnect with OAuth." }],
+            isError: true,
+          };
+        }
+
+        // Resolve all file paths up front — fail fast if any are invalid
+        const files: { path: string; content: string }[] = [];
+        for (const { hobby, resource, content } of updates) {
+          const uri = `hobby://${hobby}/${resource}`;
+          const entry = RESOURCES[uri];
+
+          if (entry?.generated) {
+            return {
+              content: [{ type: "text" as const, text: `"${hobby}/${resource}" is auto-generated from source YAML files and cannot be modified directly. Use individual resource paths like 'beans/<slug>' or 'roasters/<slug>' to update specific entries.` }],
+              isError: true,
+            };
+          }
+
+          let filePath: string;
+          if (entry) {
+            filePath = entry.filePath;
+          } else if (/^[a-z][a-z0-9-]*\/[a-z0-9][a-z0-9-]*$/.test(resource)) {
+            const ext = resource.startsWith("journal/") ? ".md" : ".yaml";
+            filePath = `hobbies/${hobby}/${resource}${ext}`;
+          } else {
+            return {
+              content: [{ type: "text" as const, text: `Unknown resource "${resource}" for hobby "${hobby}". Use list_hobby_resources to see available resources, or use 'subdir/slug' format for individual files.` }],
+              isError: true,
+            };
+          }
+          files.push({ path: filePath, content });
+        }
+
+        try {
+          const result = await commitFilesAndCreatePR({
+            token: githubToken,
+            files,
+            commitMessage: commit_message,
+            prTitle: pr_title,
+            prBody: pr_body ?? "",
+          });
+          return {
+            content: [{
+              type: "text" as const,
+              text: `PR created: ${result.prUrl}\nBranch: ${result.branch}\nFiles updated: ${files.map((f) => f.path).join(", ")}`,
+            }],
+          };
+        } catch (err) {
+          return {
+            content: [{ type: "text" as const, text: `Failed to create PR: ${err instanceof Error ? err.message : String(err)}` }],
+            isError: true,
+          };
+        }
+      },
+    );
+
+    // -----------------------------------------------------------------------
+    // Coffee upsert tool
+    // -----------------------------------------------------------------------
+
+    this.server.registerTool(
+      "upsert_coffee",
+      {
+        description:
+          "Creates or updates a coffee bean entry by committing YAML and image files to GitHub and opening a PR. " +
+          "Optionally creates a new roaster if one doesn't exist yet.",
+        inputSchema: {
+          name: z.string().describe("Bean name (e.g. 'Tropical Weather')"),
+          slug: z.string().describe("URL-safe slug (e.g. 'tropical-weather')"),
+          roaster_slug: z.string().describe("Slug of the roaster (must exist unless new_roaster is provided)"),
+          rating: z.number().min(1).max(5).optional().describe("Rating from 1-5"),
+          origins: z.array(z.string()).describe("List of origin countries"),
+          flavors: z.array(z.string()).optional().describe("Flavor notes"),
+          process: z.string().optional().describe("Processing method (e.g. 'Washed', 'Natural')"),
+          single_origin: z.boolean().describe("Whether this is a single origin coffee"),
+          currently_brewing: z.boolean().optional().describe("Whether this is currently being brewed"),
+          price_12oz: z.number().optional().describe("Price per 12oz bag in USD"),
+          notes: z.string().optional().describe("Additional notes"),
+          image_base64: z.string().describe("Base64-encoded JPEG image of the coffee bag"),
+          new_roaster: z.object({
+            name: z.string().describe("Roaster display name"),
+            slug: z.string().describe("Roaster slug"),
+            location: z.string().optional().describe("City, State"),
+            website: z.string().optional().describe("Website URL"),
+            notes: z.string().optional().describe("Notes about the roaster"),
+          }).optional().describe("Provide this to create a new roaster alongside the bean"),
+        },
+      },
+      async ({ name, slug, roaster_slug, rating, origins, flavors, process, single_origin, currently_brewing, price_12oz, notes, image_base64, new_roaster }) => {
+        if (!githubToken) {
+          return {
+            content: [{ type: "text" as const, text: "Write operations require GitHub authentication. Please reconnect with OAuth." }],
+            isError: true,
+          };
+        }
+
+        // Check if roaster exists
+        const roasterExists = roasters.some((r) => r.slug === roaster_slug);
+        if (!roasterExists && !new_roaster) {
+          return {
+            content: [{ type: "text" as const, text: `Roaster "${roaster_slug}" not found. Provide new_roaster to create it, or use an existing roaster slug.` }],
+            isError: true,
+          };
+        }
+        if (new_roaster && new_roaster.slug !== roaster_slug) {
+          return {
+            content: [{ type: "text" as const, text: `new_roaster.slug ("${new_roaster.slug}") must match roaster_slug ("${roaster_slug}").` }],
+            isError: true,
+          };
+        }
+
+        // Check if bean already exists
+        const existingBean = beans.find((b) => b.slug === slug);
+        const isUpdate = !!existingBean;
+
+        // Build bean YAML object in canonical field order
+        const beanObj: Record<string, unknown> = {
+          name,
+          slug,
+          roaster: roaster_slug,
+          rating: rating ?? null,
+          origins,
+          flavors: flavors ?? [],
+          process: process ?? "",
+          single_origin,
+          currently_brewing: currently_brewing ?? false,
+          price_12oz: price_12oz ?? null,
+          notes: notes ?? "",
+          image_url: `https://storage.googleapis.com/johnverrone/coffee/${slug}.jpg`,
+          created: isUpdate ? existingBean.created : new Date().toISOString().slice(0, 10),
         };
-      }
 
-      // Check if roaster exists
-      const roasterExists = roasters.some((r) => r.slug === roaster_slug);
-      if (!roasterExists && !new_roaster) {
-        return {
-          content: [{ type: "text" as const, text: `Roaster "${roaster_slug}" not found. Provide new_roaster to create it, or use an existing roaster slug.` }],
-          isError: true,
-        };
-      }
-      if (new_roaster && new_roaster.slug !== roaster_slug) {
-        return {
-          content: [{ type: "text" as const, text: `new_roaster.slug ("${new_roaster.slug}") must match roaster_slug ("${roaster_slug}").` }],
-          isError: true,
-        };
-      }
+        const beanYaml = yaml.stringify(beanObj);
 
-      // Check if bean already exists
-      const existingBean = beans.find((b) => b.slug === slug);
-      const isUpdate = !!existingBean;
+        // Build files array
+        const files: FileToCommit[] = [
+          { path: `hobbies/coffee/beans/${slug}.yaml`, content: beanYaml },
+          { path: `hobbies/coffee/images/${slug}.jpg`, content: image_base64, encoding: "base64" },
+        ];
 
-      // Build bean YAML object in canonical field order
-      const beanObj: Record<string, unknown> = {
-        name,
-        slug,
-        roaster: roaster_slug,
-        rating: rating ?? null,
-        origins,
-        flavors: flavors ?? [],
-        process: process ?? "",
-        single_origin,
-        currently_brewing: currently_brewing ?? false,
-        price_12oz: price_12oz ?? null,
-        notes: notes ?? "",
-        image_url: `https://storage.googleapis.com/johnverrone/coffee/${slug}.jpg`,
-        created: isUpdate ? existingBean.created : new Date().toISOString().slice(0, 10),
-      };
+        // Optionally add roaster file
+        if (new_roaster) {
+          const roasterObj: Record<string, unknown> = {
+            name: new_roaster.name,
+            slug: new_roaster.slug,
+            location: new_roaster.location ?? "",
+            website: new_roaster.website ?? "",
+            notes: new_roaster.notes ?? "",
+            image_url: "",
+          };
+          files.push({
+            path: `hobbies/coffee/roasters/${new_roaster.slug}.yaml`,
+            content: yaml.stringify(roasterObj),
+          });
+        }
 
-      const beanYaml = yaml.stringify(beanObj);
+        const action = isUpdate ? "update" : "add";
+        const prTitle = `coffee: ${action} ${name}`;
+        const bodyParts = [
+          `## ${isUpdate ? "Update" : "New"} Coffee Bean: ${name}`,
+          "",
+          `- **Roaster:** ${roaster_slug}`,
+          `- **Origins:** ${origins.join(", ")}`,
+          `- **Single Origin:** ${single_origin}`,
+        ];
+        if (flavors?.length) bodyParts.push(`- **Flavors:** ${flavors.join(", ")}`);
+        if (process) bodyParts.push(`- **Process:** ${process}`);
+        if (rating) bodyParts.push(`- **Rating:** ${rating}/5`);
+        if (price_12oz) bodyParts.push(`- **Price (12oz):** $${price_12oz}`);
+        if (notes) bodyParts.push(`- **Notes:** ${notes}`);
+        if (new_roaster) bodyParts.push("", `> New roaster created: **${new_roaster.name}**`);
 
-      // Build files array
-      const files: FileToCommit[] = [
-        { path: `hobbies/coffee/beans/${slug}.yaml`, content: beanYaml },
-        { path: `hobbies/coffee/images/${slug}.jpg`, content: image_base64, encoding: "base64" },
-      ];
-
-      // Optionally add roaster file
-      if (new_roaster) {
-        const roasterObj: Record<string, unknown> = {
-          name: new_roaster.name,
-          slug: new_roaster.slug,
-          location: new_roaster.location ?? "",
-          website: new_roaster.website ?? "",
-          notes: new_roaster.notes ?? "",
-          image_url: "",
-        };
-        files.push({
-          path: `hobbies/coffee/roasters/${new_roaster.slug}.yaml`,
-          content: yaml.stringify(roasterObj),
-        });
-      }
-
-      const action = isUpdate ? "update" : "add";
-      const prTitle = `coffee: ${action} ${name}`;
-      const bodyParts = [
-        `## ${isUpdate ? "Update" : "New"} Coffee Bean: ${name}`,
-        "",
-        `- **Roaster:** ${roaster_slug}`,
-        `- **Origins:** ${origins.join(", ")}`,
-        `- **Single Origin:** ${single_origin}`,
-      ];
-      if (flavors?.length) bodyParts.push(`- **Flavors:** ${flavors.join(", ")}`);
-      if (process) bodyParts.push(`- **Process:** ${process}`);
-      if (rating) bodyParts.push(`- **Rating:** ${rating}/5`);
-      if (price_12oz) bodyParts.push(`- **Price (12oz):** $${price_12oz}`);
-      if (notes) bodyParts.push(`- **Notes:** ${notes}`);
-      if (new_roaster) bodyParts.push("", `> New roaster created: **${new_roaster.name}**`);
-
-      try {
-        const result = await commitFilesAndCreatePR({
-          token: githubToken,
-          files,
-          commitMessage: prTitle,
-          prTitle,
-          prBody: bodyParts.join("\n"),
-        });
-        return {
-          content: [{
-            type: "text" as const,
-            text: `PR created: ${result.prUrl}\nBranch: ${result.branch}`,
-          }],
-        };
-      } catch (err) {
-        return {
-          content: [{ type: "text" as const, text: `Failed to create PR: ${err instanceof Error ? err.message : String(err)}` }],
-          isError: true,
-        };
-      }
-    }
-  );
-
-  return server;
-}
-
-// ---------------------------------------------------------------------------
-// Hono handler — fresh server + stateless transport per request
-// ---------------------------------------------------------------------------
-
-export async function mcpHandler(c: Context) {
-  const githubToken = (c.env as Record<string, string | undefined>).GITHUB_TOKEN;
-  const server = createServer(githubToken);
-  const transport = new WebStandardStreamableHTTPServerTransport({
-    sessionIdGenerator: undefined, // stateless mode
-  });
-  await server.connect(transport);
-  return transport.handleRequest(c.req.raw);
+        try {
+          const result = await commitFilesAndCreatePR({
+            token: githubToken,
+            files,
+            commitMessage: prTitle,
+            prTitle,
+            prBody: bodyParts.join("\n"),
+          });
+          return {
+            content: [{
+              type: "text" as const,
+              text: `PR created: ${result.prUrl}\nBranch: ${result.branch}`,
+            }],
+          };
+        } catch (err) {
+          return {
+            content: [{ type: "text" as const, text: `Failed to create PR: ${err instanceof Error ? err.message : String(err)}` }],
+            isError: true,
+          };
+        }
+      },
+    );
+  }
 }
