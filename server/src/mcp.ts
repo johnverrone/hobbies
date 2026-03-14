@@ -2,7 +2,8 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { z } from "zod";
 import type { Context } from "hono";
-import { updateFileAndCreatePR } from "./github";
+import { updateFileAndCreatePR, commitFilesAndCreatePR, type FileToCommit } from "./github";
+import * as yaml from "yaml";
 
 // --- data imports from route modules (already parsed at module load) ---
 import { songsData, progressMd as guitarProgressMd, planMd as guitarPlanMd } from "./routes/guitar";
@@ -303,6 +304,145 @@ function createServer(githubToken?: string): McpServer {
           commitMessage: commit_message,
           prTitle: pr_title,
           prBody: pr_body ?? "",
+        });
+        return {
+          content: [{
+            type: "text" as const,
+            text: `PR created: ${result.prUrl}\nBranch: ${result.branch}`,
+          }],
+        };
+      } catch (err) {
+        return {
+          content: [{ type: "text" as const, text: `Failed to create PR: ${err instanceof Error ? err.message : String(err)}` }],
+          isError: true,
+        };
+      }
+    }
+  );
+
+  // -------------------------------------------------------------------------
+  // Coffee upsert tool
+  // -------------------------------------------------------------------------
+
+  server.registerTool(
+    "upsert_coffee",
+    {
+      description:
+        "Creates or updates a coffee bean entry by committing YAML and image files to GitHub and opening a PR. " +
+        "Optionally creates a new roaster if one doesn't exist yet.",
+      inputSchema: {
+        name: z.string().describe("Bean name (e.g. 'Tropical Weather')"),
+        slug: z.string().describe("URL-safe slug (e.g. 'tropical-weather')"),
+        roaster_slug: z.string().describe("Slug of the roaster (must exist unless new_roaster is provided)"),
+        rating: z.number().min(1).max(5).optional().describe("Rating from 1-5"),
+        origins: z.array(z.string()).describe("List of origin countries"),
+        flavors: z.array(z.string()).optional().describe("Flavor notes"),
+        process: z.string().optional().describe("Processing method (e.g. 'Washed', 'Natural')"),
+        single_origin: z.boolean().describe("Whether this is a single origin coffee"),
+        currently_brewing: z.boolean().optional().describe("Whether this is currently being brewed"),
+        price_12oz: z.number().optional().describe("Price per 12oz bag in USD"),
+        notes: z.string().optional().describe("Additional notes"),
+        image_base64: z.string().describe("Base64-encoded JPEG image of the coffee bag"),
+        new_roaster: z.object({
+          name: z.string().describe("Roaster display name"),
+          slug: z.string().describe("Roaster slug"),
+          location: z.string().optional().describe("City, State"),
+          website: z.string().optional().describe("Website URL"),
+          notes: z.string().optional().describe("Notes about the roaster"),
+        }).optional().describe("Provide this to create a new roaster alongside the bean"),
+      },
+    },
+    async ({ name, slug, roaster_slug, rating, origins, flavors, process, single_origin, currently_brewing, price_12oz, notes, image_base64, new_roaster }) => {
+      if (!githubToken) {
+        return {
+          content: [{ type: "text" as const, text: "Write operations require a GITHUB_TOKEN secret to be configured on the worker." }],
+          isError: true,
+        };
+      }
+
+      // Check if roaster exists
+      const roasterExists = roasters.some((r) => r.slug === roaster_slug);
+      if (!roasterExists && !new_roaster) {
+        return {
+          content: [{ type: "text" as const, text: `Roaster "${roaster_slug}" not found. Provide new_roaster to create it, or use an existing roaster slug.` }],
+          isError: true,
+        };
+      }
+      if (new_roaster && new_roaster.slug !== roaster_slug) {
+        return {
+          content: [{ type: "text" as const, text: `new_roaster.slug ("${new_roaster.slug}") must match roaster_slug ("${roaster_slug}").` }],
+          isError: true,
+        };
+      }
+
+      // Check if bean already exists
+      const existingBean = beans.find((b) => b.slug === slug);
+      const isUpdate = !!existingBean;
+
+      // Build bean YAML object in canonical field order
+      const beanObj: Record<string, unknown> = {
+        name,
+        slug,
+        roaster: roaster_slug,
+        rating: rating ?? null,
+        origins,
+        flavors: flavors ?? [],
+        process: process ?? "",
+        single_origin,
+        currently_brewing: currently_brewing ?? false,
+        price_12oz: price_12oz ?? null,
+        notes: notes ?? "",
+        image_url: `https://storage.googleapis.com/johnverrone/coffee/${slug}.jpg`,
+        created: isUpdate ? existingBean.created : new Date().toISOString().slice(0, 10),
+      };
+
+      const beanYaml = yaml.stringify(beanObj);
+
+      // Build files array
+      const files: FileToCommit[] = [
+        { path: `hobbies/coffee/beans/${slug}.yaml`, content: beanYaml },
+        { path: `hobbies/coffee/images/${slug}.jpg`, content: image_base64, encoding: "base64" },
+      ];
+
+      // Optionally add roaster file
+      if (new_roaster) {
+        const roasterObj: Record<string, unknown> = {
+          name: new_roaster.name,
+          slug: new_roaster.slug,
+          location: new_roaster.location ?? "",
+          website: new_roaster.website ?? "",
+          notes: new_roaster.notes ?? "",
+          image_url: "",
+        };
+        files.push({
+          path: `hobbies/coffee/roasters/${new_roaster.slug}.yaml`,
+          content: yaml.stringify(roasterObj),
+        });
+      }
+
+      const action = isUpdate ? "update" : "add";
+      const prTitle = `coffee: ${action} ${name}`;
+      const bodyParts = [
+        `## ${isUpdate ? "Update" : "New"} Coffee Bean: ${name}`,
+        "",
+        `- **Roaster:** ${roaster_slug}`,
+        `- **Origins:** ${origins.join(", ")}`,
+        `- **Single Origin:** ${single_origin}`,
+      ];
+      if (flavors?.length) bodyParts.push(`- **Flavors:** ${flavors.join(", ")}`);
+      if (process) bodyParts.push(`- **Process:** ${process}`);
+      if (rating) bodyParts.push(`- **Rating:** ${rating}/5`);
+      if (price_12oz) bodyParts.push(`- **Price (12oz):** $${price_12oz}`);
+      if (notes) bodyParts.push(`- **Notes:** ${notes}`);
+      if (new_roaster) bodyParts.push("", `> New roaster created: **${new_roaster.name}**`);
+
+      try {
+        const result = await commitFilesAndCreatePR({
+          token: githubToken,
+          files,
+          commitMessage: prTitle,
+          prTitle,
+          prBody: bodyParts.join("\n"),
         });
         return {
           content: [{
