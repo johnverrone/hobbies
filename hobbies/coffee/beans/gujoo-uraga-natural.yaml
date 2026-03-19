@@ -11,8 +11,9 @@ flavors:
   - nectarine
 process: Natural
 single_origin: true
-currently_brewing: false
+currently_brewing: true
 price_12oz: 25
-notes: "Producers: Uraga Area Farmers, Gujoo Coffee, Uraga Station. Roast/Blend Date: 3/10/26. Net Wt: 12oz. From Huckleberry Roasters, Denver, Colorado."
+notes: "Producers: Uraga Area Farmers, Gujoo Coffee, Uraga Station. Roast/Blend
+  Date: 3/10/26. Net Wt: 12oz. From Huckleberry Roasters, Denver, Colorado."
 image_url: https://storage.googleapis.com/johnverrone/coffee/gujoo-uraga-natural.jpg
 created: 2026-03-14
