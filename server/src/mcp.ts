@@ -20,17 +20,17 @@ import { roundsData } from "./routes/golf";
 // ---------------------------------------------------------------------------
 
 type ResourceEntry =
-  | { mime: "application/json"; data: unknown; filePath: string }
-  | { mime: "text/markdown"; data: string; filePath: string };
+  | { mime: "application/json"; data: unknown; filePath: string; generated?: true }
+  | { mime: "text/markdown"; data: string; filePath: string; generated?: true };
 
 const RESOURCES: Record<string, ResourceEntry> = {
   // guitar
   "hobby://guitar/songs":    { mime: "application/json", data: songsData, filePath: "hobbies/guitar/songs.yaml" },
   "hobby://guitar/progress": { mime: "text/markdown",    data: guitarProgressMd, filePath: "hobbies/guitar/progress.md" },
   "hobby://guitar/plan":     { mime: "text/markdown",    data: guitarPlanMd, filePath: "hobbies/guitar/plan.md" },
-  // coffee (generated JSON, not raw YAML)
-  "hobby://coffee/beans":    { mime: "application/json", data: beans, filePath: "server/src/generated/beans.json" },
-  "hobby://coffee/roasters": { mime: "application/json", data: roasters, filePath: "server/src/generated/roasters.json" },
+  // coffee (generated JSON — read-only; write via individual beans/<slug> or roasters/<slug>)
+  "hobby://coffee/beans":    { mime: "application/json", data: beans, filePath: "server/src/generated/beans.json", generated: true },
+  "hobby://coffee/roasters": { mime: "application/json", data: roasters, filePath: "server/src/generated/roasters.json", generated: true },
   // software
   "hobby://software/projects": { mime: "application/json", data: projectsData, filePath: "hobbies/software/projects.yaml" },
   "hobby://software/skills":   { mime: "application/json", data: skillsData, filePath: "hobbies/software/skills.yaml" },
@@ -296,6 +296,13 @@ function createServer(githubToken?: string): McpServer {
       const uri = `hobby://${hobby}/${resource}`;
       const entry = RESOURCES[uri];
 
+      if (entry?.generated) {
+        return {
+          content: [{ type: "text" as const, text: `"${hobby}/${resource}" is auto-generated from source YAML files and cannot be modified directly. Use individual resource paths like 'beans/<slug>' or 'roasters/<slug>' to update specific entries.` }],
+          isError: true,
+        };
+      }
+
       // Determine file path: prefer registry entry, then fall back to
       // constructing a path for individual files (e.g. beans/<slug> → hobbies/coffee/beans/<slug>.yaml)
       let filePath: string;
@@ -366,6 +373,14 @@ function createServer(githubToken?: string): McpServer {
       for (const { hobby, resource, content } of updates) {
         const uri = `hobby://${hobby}/${resource}`;
         const entry = RESOURCES[uri];
+
+        if (entry?.generated) {
+          return {
+            content: [{ type: "text" as const, text: `"${hobby}/${resource}" is auto-generated from source YAML files and cannot be modified directly. Use individual resource paths like 'beans/<slug>' or 'roasters/<slug>' to update specific entries.` }],
+            isError: true,
+          };
+        }
+
         let filePath: string;
         if (entry) {
           filePath = entry.filePath;
