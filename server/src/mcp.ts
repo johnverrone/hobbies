@@ -6,7 +6,7 @@ import { updateFileAndCreatePR, commitFilesAndCreatePR, type FileToCommit } from
 import * as yaml from "yaml";
 
 // --- data imports from route modules (already parsed at module load) ---
-import { songsData, progressMd as guitarProgressMd, planMd as guitarPlanMd } from "./routes/guitar";
+import { songsData, journalData as guitarJournal, planMd as guitarPlanMd, type JournalEntry } from "./routes/guitar";
 import { beans, roasters } from "./routes/coffee";
 import { projectsData, skillsData, ideasData, softwareProgressMd, goalsMd } from "./routes/software";
 import { runningProgressMd, prsMd } from "./routes/running";
@@ -26,7 +26,7 @@ type ResourceEntry =
 const RESOURCES: Record<string, ResourceEntry> = {
   // guitar
   "hobby://guitar/songs":    { mime: "application/json", data: songsData, filePath: "hobbies/guitar/songs.yaml" },
-  "hobby://guitar/progress": { mime: "text/markdown",    data: guitarProgressMd, filePath: "hobbies/guitar/progress.md" },
+  "hobby://guitar/journal":  { mime: "application/json", data: guitarJournal, filePath: "hobbies/guitar/journal/" },
   "hobby://guitar/plan":     { mime: "text/markdown",    data: guitarPlanMd, filePath: "hobbies/guitar/plan.md" },
   // coffee (generated JSON — read-only; write via individual beans/<slug> or roasters/<slug>)
   "hobby://coffee/beans":    { mime: "application/json", data: beans, filePath: "server/src/generated/beans.json", generated: true },
@@ -276,8 +276,9 @@ function createServer(githubToken?: string): McpServer {
       inputSchema: {
         hobby: z.string().describe("The hobby name (e.g. 'guitar', 'software', 'coffee')"),
         resource: z.string().describe(
-          "The resource name. For top-level resources: 'songs', 'progress', 'plan'. " +
-          "For individual files in a subdirectory: 'beans/<slug>' or 'roasters/<slug>' (e.g. 'beans/gujoo-uraga-natural')."
+          "The resource name. For top-level resources: 'songs', 'journal', 'plan'. " +
+          "For individual files in a subdirectory: 'beans/<slug>', 'roasters/<slug>', or 'journal/<date>' " +
+          "(e.g. 'beans/gujoo-uraga-natural', 'journal/2026-03-14'). Journal entries use .md extension."
         ),
         content: z.string().describe("The full updated file content"),
         commit_message: z.string().describe("A short commit message describing the change"),
@@ -305,11 +306,13 @@ function createServer(githubToken?: string): McpServer {
 
       // Determine file path: prefer registry entry, then fall back to
       // constructing a path for individual files (e.g. beans/<slug> → hobbies/coffee/beans/<slug>.yaml)
+      // Journal entries use .md extension; everything else defaults to .yaml
       let filePath: string;
       if (entry) {
         filePath = entry.filePath;
       } else if (/^[a-z][a-z0-9-]*\/[a-z0-9][a-z0-9-]*$/.test(resource)) {
-        filePath = `hobbies/${hobby}/${resource}.yaml`;
+        const ext = resource.startsWith("journal/") ? ".md" : ".yaml";
+        filePath = `hobbies/${hobby}/${resource}${ext}`;
       } else {
         return {
           content: [{ type: "text" as const, text: `Unknown resource "${resource}" for hobby "${hobby}". Use list_hobby_resources to see available resources, or use 'subdir/slug' format for individual files.` }],
@@ -385,7 +388,8 @@ function createServer(githubToken?: string): McpServer {
         if (entry) {
           filePath = entry.filePath;
         } else if (/^[a-z][a-z0-9-]*\/[a-z0-9][a-z0-9-]*$/.test(resource)) {
-          filePath = `hobbies/${hobby}/${resource}.yaml`;
+          const ext = resource.startsWith("journal/") ? ".md" : ".yaml";
+          filePath = `hobbies/${hobby}/${resource}${ext}`;
         } else {
           return {
             content: [{ type: "text" as const, text: `Unknown resource "${resource}" for hobby "${hobby}". Use list_hobby_resources to see available resources, or use 'subdir/slug' format for individual files.` }],
