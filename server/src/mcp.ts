@@ -334,6 +334,75 @@ function createServer(githubToken?: string): McpServer {
     }
   );
 
+  server.registerTool(
+    "batch_update_hobby_files",
+    {
+      description:
+        "Commits multiple hobby file updates in a single branch and pull request. " +
+        "Use this instead of calling update_hobby_file repeatedly when you need to edit more than one file. " +
+        "Supports the same resource path formats: top-level names (e.g. 'songs', 'progress') or " +
+        "subdirectory slugs (e.g. 'beans/gujoo-uraga-natural', 'roasters/madrone-coffee-co').",
+      inputSchema: {
+        updates: z.array(z.object({
+          hobby: z.string().describe("The hobby name (e.g. 'coffee', 'guitar')"),
+          resource: z.string().describe("The resource name or 'subdir/slug' path (e.g. 'beans/gujoo-uraga-natural')"),
+          content: z.string().describe("The full updated file content"),
+        })).min(1).describe("List of files to update in this single commit"),
+        commit_message: z.string().describe("A short commit message describing all the changes"),
+        pr_title: z.string().describe("Pull request title"),
+        pr_body: z.string().optional().describe("Optional pull request body/description"),
+      },
+    },
+    async ({ updates, commit_message, pr_title, pr_body }) => {
+      if (!githubToken) {
+        return {
+          content: [{ type: "text" as const, text: "Write operations require a GITHUB_TOKEN secret to be configured on the worker." }],
+          isError: true,
+        };
+      }
+
+      // Resolve all file paths up front — fail fast if any are invalid
+      const files: { path: string; content: string }[] = [];
+      for (const { hobby, resource, content } of updates) {
+        const uri = `hobby://${hobby}/${resource}`;
+        const entry = RESOURCES[uri];
+        let filePath: string;
+        if (entry) {
+          filePath = entry.filePath;
+        } else if (/^[a-z][a-z0-9-]*\/[a-z0-9][a-z0-9-]*$/.test(resource)) {
+          filePath = `hobbies/${hobby}/${resource}.yaml`;
+        } else {
+          return {
+            content: [{ type: "text" as const, text: `Unknown resource "${resource}" for hobby "${hobby}". Use list_hobby_resources to see available resources, or use 'subdir/slug' format for individual files.` }],
+            isError: true,
+          };
+        }
+        files.push({ path: filePath, content });
+      }
+
+      try {
+        const result = await commitFilesAndCreatePR({
+          token: githubToken,
+          files,
+          commitMessage: commit_message,
+          prTitle: pr_title,
+          prBody: pr_body ?? "",
+        });
+        return {
+          content: [{
+            type: "text" as const,
+            text: `PR created: ${result.prUrl}\nBranch: ${result.branch}\nFiles updated: ${files.map((f) => f.path).join(", ")}`,
+          }],
+        };
+      } catch (err) {
+        return {
+          content: [{ type: "text" as const, text: `Failed to create PR: ${err instanceof Error ? err.message : String(err)}` }],
+          isError: true,
+        };
+      }
+    }
+  );
+
   // -------------------------------------------------------------------------
   // Coffee upsert tool
   // -------------------------------------------------------------------------
