@@ -269,10 +269,16 @@ function createServer(githubToken?: string): McpServer {
     {
       description:
         "Updates a hobby data file (YAML or markdown) by creating a branch, committing the change, and opening a pull request. " +
-        "Use read_hobby_data or read_hobby_narrative first to get the current content, then pass the full updated content here.",
+        "Use read_hobby_data or read_hobby_narrative first to get the current content, then pass the full updated content here. " +
+        "For individual coffee files, use resource paths like 'beans/<slug>' or 'roasters/<slug>' " +
+        "(e.g. resource='beans/gujoo-uraga-natural' maps to hobbies/coffee/beans/gujoo-uraga-natural.yaml). " +
+        "This same pattern works for any hobby subdirectory: '<subdir>/<slug>'.",
       inputSchema: {
-        hobby: z.string().describe("The hobby name (e.g. 'guitar', 'software')"),
-        resource: z.string().describe("The resource name (e.g. 'songs', 'progress', 'plan')"),
+        hobby: z.string().describe("The hobby name (e.g. 'guitar', 'software', 'coffee')"),
+        resource: z.string().describe(
+          "The resource name. For top-level resources: 'songs', 'progress', 'plan'. " +
+          "For individual files in a subdirectory: 'beans/<slug>' or 'roasters/<slug>' (e.g. 'beans/gujoo-uraga-natural')."
+        ),
         content: z.string().describe("The full updated file content"),
         commit_message: z.string().describe("A short commit message describing the change"),
         pr_title: z.string().describe("Pull request title"),
@@ -289,9 +295,17 @@ function createServer(githubToken?: string): McpServer {
 
       const uri = `hobby://${hobby}/${resource}`;
       const entry = RESOURCES[uri];
-      if (!entry) {
+
+      // Determine file path: prefer registry entry, then fall back to
+      // constructing a path for individual files (e.g. beans/<slug> → hobbies/coffee/beans/<slug>.yaml)
+      let filePath: string;
+      if (entry) {
+        filePath = entry.filePath;
+      } else if (/^[a-z][a-z0-9-]*\/[a-z0-9][a-z0-9-]*$/.test(resource)) {
+        filePath = `hobbies/${hobby}/${resource}.yaml`;
+      } else {
         return {
-          content: [{ type: "text" as const, text: `Unknown resource "${resource}" for hobby "${hobby}". Use list_hobby_resources to see available resources.` }],
+          content: [{ type: "text" as const, text: `Unknown resource "${resource}" for hobby "${hobby}". Use list_hobby_resources to see available resources, or use 'subdir/slug' format for individual files.` }],
           isError: true,
         };
       }
@@ -299,7 +313,7 @@ function createServer(githubToken?: string): McpServer {
       try {
         const result = await updateFileAndCreatePR({
           token: githubToken,
-          filePath: entry.filePath,
+          filePath,
           newContent: content,
           commitMessage: commit_message,
           prTitle: pr_title,
