@@ -37,6 +37,13 @@ app.route('/video', video)
 app.route('/photography', photography)
 app.route('/golf', golf)
 
-app.all('/mcp', (c) => mcpHandler(c))
+app.all('/mcp', (c) => {
+  const auth = c.req.header('Authorization')
+  const expected = (c.env as Record<string, string | undefined>).MCP_AUTH_TOKEN
+  if (!expected || auth !== `Bearer ${expected}`) {
+    return c.text('Unauthorized', 401)
+  }
+  return mcpHandler(c)
+})
 
 export default app
